@@ -1,0 +1,77 @@
+Game Board
+  - Has building supply
+  - Has doubloons supply
+  - Has VP supply
+  - Has crops supply
+    - Corn, indigo, sugar, tobacco, coffee
+  - Has colonist supply
+  - Has colonist ship
+  - Has trading house
+  - Has ships
+  - Has player boards
+    - Has plantations
+      - Has colonists
+    - Has buildings
+      - Has colonists
+    - Has doubloons
+    - Has VPs
+    - Has crops
+
+
+Game Turn
+  - Player picks job
+  - Job resolves
+  - Repeat until all players have picked a job
+  - Incentivize remaining jobs
+  - Replace jobs
+  - Governor passes
+
+MODELS
+Player:
+ - doubloons: int
+ - name: string
+ - VPs: int
+ - ID: int
+
+Buildings:
+ - ownerID: int
+ - cost: int
+ - name: int
+ - colonist: boolean[]
+
+Crops:
+ - pool: Crop[]
+ - flop: Crop[]
+ - owned: Crop[]
+
+Crop:
+ - ownerID: int
+ - type: string
+ - colonist: boolean
+
+Ships:
+ - ships: Ship[]
+
+Ship:
+ - capacity: int
+ - available: int
+ - cropType: string
+
+Colonists:
+ - pool: int
+
+VPs:
+ - pool: int
+
+CropBarrels:
+ - pool: {corn, indigo, sugar, tobacco, coffee} - ints
+
+TradingHouse:
+ - slots: string[]
+
+Turns:
+ - {playerID, currentPlayer}[]
+    - playerID: int
+    - currentPlayer: boolean
+
+
