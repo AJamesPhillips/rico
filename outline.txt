@@ -33,6 +33,12 @@ Player:
  - VPs: int
  - ID: int
 
+Jobs:
+ - name: string
+ - takenBy: int
+ - incentive: int
+ - id: int
+
 Buildings:
  - ownerID: int
  - cost: int

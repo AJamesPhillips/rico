@@ -1,20 +1,17 @@
-import * as actions from 'actions/actions.js';
+import * as actions from './actions/actions.js';
 
 var players = ['kyle', 'hannah', 'rob'];
 
 const initializeGameState = (store) => {
   const turns = players.map((player, index) => {
     store.dispatch(actions.addPlayer(player, 3));
-
-    return {
-      playerID: index,
-      currentPlayer: index === 0
-    };
   });
+
+  const players = store.getState().boards;
 
   store.dispatch({
     type: 'INITIALIZE_TURNS',
-    turns
+    players
   });
 
   const jobs = [{

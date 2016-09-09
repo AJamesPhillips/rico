@@ -1,4 +1,4 @@
-const turns = (state = [], action) => {
+export const turns = (state = [], action) => {
   switch (action.type) {
     case 'INITIALIZE_TURNS':
       return action.players.map((player, index) => {
@@ -8,27 +8,28 @@ const turns = (state = [], action) => {
         };
       });
     case 'NEXT_TURN':
+      const currentPlayerIndex = state.findIndex(player => player.currentPlayer);
       // there are still players left in the round
-      if (action.currentPlayerIndex < state.length - 1) {
+      if (currentPlayerIndex < state.length - 1) {
         return [
-          ...state.slice(0, action.currentPlayerIndex),
+          ...state.slice(0, currentPlayerIndex),
           {
-            ...state[action.currentPlayerIndex],
+            ...state[currentPlayerIndex],
             currentPlayer: false
           },
           {
-            ...state[action.currentPlayerIndex+1],
+            ...state[currentPlayerIndex+1],
             currentPlayer: true
           },
-          ...state.slice(action.currentPlayerIndex+2)
+          ...state.slice(currentPlayerIndex+2)
         ];
       }
 
       // we're at the end of the round
       return [
-        ...state.slice(0, action.currentPlayerIndex),
+        ...state.slice(0, currentPlayerIndex),
         {
-          ...state[action.currentPlayerIndex],
+          ...state[currentPlayerIndex],
           currentPlayer: false
         }
       ];
@@ -48,38 +49,40 @@ const turns = (state = [], action) => {
   }
 };
 
-const jobTurns = (state = [], action) => {
+export const jobTurns = (state = [], action) => {
   switch (action.type) {
     case 'START_JOB_PHASE':
+      const currentPlayerTurnIndex = action.playerTurns.findIndex(p => p.currentPlayer);
       return [
         {
-          ...action.playerTurns[action.currentPlayerTurnIndex],
+          ...action.playerTurns[currentPlayerTurnIndex],
           currentJobPlayer: true
         },
-        ...action.playerTurns.slice(action.currentPlayerTurnIndex+1),
-        ...action.playerTurns.slice(0, action.currentPlayerTurnIndex)
+        ...action.playerTurns.slice(currentPlayerTurnIndex+1),
+        ...action.playerTurns.slice(0, currentPlayerTurnIndex)
       ];
     case 'NEXT_JOB_TURN':
+      const currentJobPlayerIndex = state.findIndex(p => p.currentJobPlayer);
       // there are still players left in the job phase
-      if (action.currentJobPlayerIndex < state.length - 1) {
+      if (currentJobPlayerIndex < state.length - 1) {
         return [
-          ...state.slice(0, action.currentJobPlayerIndex),
+          ...state.slice(0, currentJobPlayerIndex),
           {
-            ...state[action.currentJobPlayerIndex],
+            ...state[currentJobPlayerIndex],
             currentJobPlayer: false
           },
           {
-            ...state[action.currentJobPlayerIndex+1],
+            ...state[currentJobPlayerIndex+1],
             currentJobPlayer: true
           },
-          ...state.slice(action.currentJobPlayerIndex+2)
+          ...state.slice(currentJobPlayerIndex+2)
         ];
       }
       // we're at the end of the round
       return [
-        ...state.slice(0, action.currentJobPlayerIndex),
+        ...state.slice(0, currentJobPlayerIndex),
         {
-          ...state[action.currentJobPlayerIndex],
+          ...state[currentJobPlayerIndex],
           currentJobPlayer: false
         }
       ];
@@ -90,7 +93,7 @@ const jobTurns = (state = [], action) => {
   }
 };
 
-const activePlayerTab = (state = 0, action) => {
+export const activePlayerTab = (state = 0, action) => {
   switch (action.type) {
     case 'UPDATE_ACTIVE_PLAYER_TAB':
       return action.key;
@@ -99,4 +102,3 @@ const activePlayerTab = (state = 0, action) => {
   }
 };
 
-export { activePlayerTab, turns, jobTurns  }
