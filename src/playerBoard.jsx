@@ -25,12 +25,12 @@ const PlayerBoard = ({
   return (
     <div className="player-board">
       <p>{governor ? 'GOVERNOR' : ''}</p>
-      <p>{currentPlayer() ? 'This player\'s turn' : ''}</p>
-      <p>{currentJobPlayer() ? 'This player\'s job phase' : ''}</p>
+      <p>{currentPlayer ? 'This player\'s turn' : ''}</p>
+      <p>{currentJobPlayer ? 'This player\'s job phase' : ''}</p>
       {/*<p>{board.currentJobPlayer ? 'This player\'s job' : ''}</p>*/}
       <p>{board.name}</p>
       <DoubloonCounter doubloons={board.doubloons} />
-      <Row>
+      {/** <Row>
         {board.buildings.map(building =>
           <Col
             key={building.name}
@@ -52,7 +52,7 @@ const PlayerBoard = ({
             )
           })
         }
-      </Row>
+      </Row> */}
     </div>
   );
 }
@@ -66,6 +66,7 @@ const fillEmptyBuildingSpaces = (buildingCount) => {
   return emptySpaces;
 }
 
+// TODO: Figure out how to convert mapped state to a container component
 class PlayerBoards extends React.Component {
   componentDidMount() {
     this.unsubscribe = this.context.store.subscribe(() =>
@@ -87,6 +88,7 @@ class PlayerBoards extends React.Component {
     return (
       <Tabs
         activeKey={state.activePlayerTab}
+        id={'0'}
         onSelect={(key) => {
           store.dispatch({
             type: 'UPDATE_ACTIVE_PLAYER_TAB',
@@ -101,20 +103,20 @@ class PlayerBoards extends React.Component {
             eventKey={index}>
             <PlayerBoard
               board={board}
-              currentPlayer={() => {
+              currentPlayer={(() => {
                 let yourTurn = false;
                 if (currentPlayer !== undefined) {
                   yourTurn = currentPlayer.playerID === board.id;
                 }
                 return yourTurn;
-              }}
-              currentJobPlayer={() => {
+              })()}
+              currentJobPlayer={(() => {
                 let yourTurn = false;
                 if (currentJobPlayer !== undefined) {
                   yourTurn = currentJobPlayer.playerID === board.id;
                 }
                 return yourTurn;
-              }}
+              })()}
               governor={state.turns[0].playerID === board.id} />
           </Tab>
         )}

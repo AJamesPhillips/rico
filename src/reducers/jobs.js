@@ -1,4 +1,4 @@
-const jobs = (state = [], action) => {
+export const jobs = (state = [], action) => {
   switch (action.type) {
     case 'INITIALIZE_JOBS':
       return action.jobs;
@@ -56,4 +56,3 @@ const jobs = (state = [], action) => {
   }
 }
 
-export { jobs }

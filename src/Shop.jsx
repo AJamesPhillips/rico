@@ -40,6 +40,7 @@ class Shop extends React.Component {
             key={building.name}
             disabled={state.jobTurns.find(player => player.currentJobPlayer) === undefined
                    || state.buildings.find(stateBuilding => stateBuilding.name === building.name).supply <= 0
+                  /* TODO: refactor the fuck out of this vvvv */
                    || state.boards.find(player => player.id === state.turns.find(playerTurn => playerTurn.currentPlayer).playerID).doubloons <= building.cost}
             supply={building.supply + '/' + building.initialSupply}
             onClick={() => resolvePurchase(building, store)}
