@@ -1,19 +1,14 @@
 import { createStore, combineReducers } from 'redux';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 
-import { PlayerBoards } from './playerBoard';
+import PlayerBoards from './components/board/boards';
 import { Jobs } from './jobs'
 import { Shop } from './Shop';
 import { initializeGameState } from './GameManager';
 
-import { boards } from './reducers/boards';
-import { jobs } from './reducers/jobs';
-import { buildings } from './reducers/buildings';
-import { turns, jobTurns, activePlayerTab } from './reducers/turns';
-
-const ricoApp = combineReducers({boards, jobs, buildings, turns, jobTurns, activePlayerTab});
+import ricoApp from './reducers/index';
 
 const RicoApp = () => {
   return (
