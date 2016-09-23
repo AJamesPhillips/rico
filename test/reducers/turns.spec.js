@@ -1,7 +1,7 @@
 import expect from 'expect';
 import { turns, jobTurns } from '../../src/reducers/turns.js';
 
-describe('turns', function() {
+describe('turns reducer', function() {
   it('should handle INITIALIZE_TURNS', function() {
     const playerState = [{
       name: 'playerOne',
@@ -144,7 +144,7 @@ describe('turns', function() {
   });
 });
 
-describe('jobTurns', function() {
+describe('jobTurns reducer', function() {
   it('should handle START_JOB_PHASE', function() {
     const playerTurns = [{
       playerID: 0,
