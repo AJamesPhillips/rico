@@ -8,7 +8,8 @@ const boards = (state = [], action) => {
         {
           name: action.name,
           id: idCounter++,
-          doubloons: action.doubloons
+          doubloons: action.doubloons,
+          buildings: []
         }
       ];
     case 'MODIFY_DOUBLOONS':
