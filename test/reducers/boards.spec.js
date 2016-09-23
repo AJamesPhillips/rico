@@ -13,7 +13,8 @@ describe('boards reducer', function() {
       {
         name: 'mockPlayer',
         id: 0,
-        doubloons: 3
+        doubloons: 3,
+        buildings: []
       }
     ]);
   });
@@ -23,7 +24,8 @@ describe('boards reducer', function() {
       boards([{
         name: 'mockPlayer',
         id: 0,
-        doubloons: 3
+        doubloons: 3,
+        buildings: []
       }], {
         type: 'MODIFY_DOUBLOONS',
         id: 0,
@@ -32,7 +34,8 @@ describe('boards reducer', function() {
     ).toEqual([{
       name: 'mockPlayer',
       id: 0,
-      doubloons: 5
+      doubloons: 5,
+      buildings: []
     }]);
   });
 });
