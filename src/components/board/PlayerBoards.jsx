@@ -5,7 +5,8 @@ import Tabs from 'react-bootstrap/lib/Tabs';
 import Tab from 'react-bootstrap/lib/Tab';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
-import PlayerBoard from './board';
+import PlayerBoard from './PlayerBoard';
+
 class PlayerBoards extends React.Component {
   componentDidMount() {
     this.unsubscribe = this.context.store.subscribe(() =>

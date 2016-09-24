@@ -3,8 +3,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import PlayerBoards from './components/board/boards';
-import { Jobs } from './jobs'
+import PlayerBoards from './components/board/PlayerBoards';
+import Jobs from './components/jobs/Jobs';
 import { Shop } from './Shop';
 import { initializeGameState } from './GameManager';
 
