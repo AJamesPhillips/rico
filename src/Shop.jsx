@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Button from 'react-bootstrap/lib/Button';
 import Panel from 'react-bootstrap/lib/Panel';
-import { jobHasResolved } from './jobs';
+import { jobHasResolved } from './components/jobs/service';
 
 const Building = ({name, cost, disabled, supply, onClick}) => {
   return (

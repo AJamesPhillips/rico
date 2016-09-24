@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import expect from 'expect';
-import DoubloonCounter from '../../../src/components/board/doubloons';
+import DoubloonCounter from '../../../src/components/board/DoubloonCounter';
 
 function setup(props) {
   return shallow(<DoubloonCounter {...props} />);

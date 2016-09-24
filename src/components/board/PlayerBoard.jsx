@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import PlayerStatus from './status';
-import DoubloonCounter from './doubloons';
+import DoubloonCounter from './DoubloonCounter';
 import PlayerBuildings from './buildings';
 
 import '../../styles/PlayerBoard.scss';
