@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import PlayerBoards from './components/board/PlayerBoards';
 import Jobs from './components/jobs/Jobs';
-import { Shop } from './Shop';
+import Shop from './components/shop/Shop';
 import { initializeGameState } from './GameManager';
 
 import ricoApp from './reducers/index';
