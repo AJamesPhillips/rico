@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Building from './Building';
-
+import { resolvePurchase } from './service';
 class Shop extends React.Component {
   componentDidMount() {
     this.unsubscribe = this.context.store.subscribe(() =>
@@ -23,9 +23,10 @@ class Shop extends React.Component {
         <h2>Shop</h2>
         {
           state.buildings.map(building => {
-            const disabled = inBuildPhase(state) ||
-                             buildingHasSupply(building) ||
-                             playerCanAffordBuilding(state, building);
+            console.log(inBuildPhase(state), buildingHasSupply(building), playerCanAffordBuilding(state, building));
+            const disabled = !inBuildPhase(state) ||
+                             !buildingHasSupply(building) ||
+                             !playerCanAffordBuilding(state, building);
             return (
               <Building
                 key={building.name}
@@ -47,7 +48,7 @@ Shop.contextTypes = {
 };
 
 const inBuildPhase = (state) => {
-  return state.jobTurns.find(player => player.currentJobPlayer) === undefined;
+  return state.jobTurns.find(player => player.currentJobPlayer) !== undefined;
 };
 
 const buildingHasSupply = (building) => {

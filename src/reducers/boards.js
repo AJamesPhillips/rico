@@ -23,6 +23,23 @@ const boards = (state = [], action) => {
           doubloons: player.doubloons + action.doubloons
         };
       });
+    case 'ADD_BUILDING':
+      return state.map(player => {
+        if (player.id !== action.id) {
+          return player;
+        }
+
+        return {
+          ...player,
+          buildings: [
+            ...player.buildings,
+            {
+              name: action.building.name,
+              colonists: action.building.colonists
+            }
+          ]
+        };
+      })
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import { jobHasResolved } from '../jobs/services';
+import { jobHasResolved } from '../jobs/service';
 
 export const resolvePurchase = (store, building) => {
   const state = store.getState();
@@ -23,7 +23,7 @@ export const resolvePurchase = (store, building) => {
 
   store.dispatch({
     type: 'ADD_BUILDING',
-    currentJobPlayerID,
+    id: currentJobPlayerID,
     building
   });
 
@@ -32,6 +32,7 @@ export const resolvePurchase = (store, building) => {
     building
   });
 
+  let discount = 0;
   // check if the buyer has the Builder privilege
   if (state.jobs.find(job => job.title === 'builder' && job.takenBy === currentJobPlayerID)) {
     discount = 1;
@@ -44,18 +45,16 @@ export const resolvePurchase = (store, building) => {
   });
 
   store.dispatch({
-    type: 'NEXT_JOB_TURN',
-    currentJobPlayerIndex
+    type: 'NEXT_JOB_TURN'
   });
-
-  const updatedState = store.getState();
 
   if (currentJobPlayerIndex + 1 === state.jobTurns.length) {
     jobHasResolved(store);
   }
   else {
-    const newJobPlayer = state.jobTurns.find(p => p.currentJobPlayer);
-    const newJobPlayerTabIndex = state.boards.findIndex(p => p.id === newJobPlayer.playerID);
+    const updatedState = store.getState();
+    const newJobPlayer = updatedState.jobTurns.find(p => p.currentJobPlayer);
+    const newJobPlayerTabIndex = updatedState.boards.findIndex(p => p.id === newJobPlayer.playerID);
     store.dispatch({
       type: 'UPDATE_ACTIVE_PLAYER_TAB',
       key: newJobPlayerTabIndex

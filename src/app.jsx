@@ -20,7 +20,7 @@ const RicoApp = () => {
   );
 };
 
-let store = createStore(ricoApp);
+let store = createStore(ricoApp, window.devToolsExtension && window.devToolsExtension());
 
 initializeGameState(store);
 
