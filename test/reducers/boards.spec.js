@@ -37,7 +37,7 @@ describe('boards reducer', function() {
     var newState = [{
       name: 'mockPlayer',
       id: 0,
-      doubloons: 2
+      doubloons: 5
     }, {
       name: 'mockPlayer2',
       id: 1,
