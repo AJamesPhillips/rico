@@ -1,7 +1,11 @@
 import expect from 'expect';
-import { turns, jobTurns } from '../../src/reducers/turns.js';
+import { turns, jobTurns, activePlayerTab } from '../../src/reducers/turns.js';
 
 describe('turns reducer', function() {
+  it('should handle default', function() {
+    expect(turns([], {})).toEqual([]);
+  });
+
   it('should handle INITIALIZE_TURNS', function() {
     const playerState = [{
       name: 'playerOne',
@@ -145,6 +149,10 @@ describe('turns reducer', function() {
 });
 
 describe('jobTurns reducer', function() {
+  it('should handle default', function() {
+    expect(jobTurns([], {})).toEqual([]);
+  });
+
   it('should handle START_JOB_PHASE', function() {
     const playerTurns = [{
       playerID: 0,
@@ -210,6 +218,25 @@ describe('jobTurns reducer', function() {
     ).toEqual(updatedState);
   });
 
+  it('should handle END_JOB_PHASE', function() {
+    const state = [{
+      playerID: 1,
+      currentPlayer: true,
+    }, {
+      playerID: 2,
+      currentPlayer: false
+    }, {
+      playerID: 0,
+      currentPlayer: false,
+      currentJobPlayer: true
+    }];
+
+    expect(jobTurns(state, {
+      type: 'END_JOB_PHASE'
+    })).toEqual([]);
+  });
+
+
   it('should end job turns', function() {
     const jobTurnsState = [{
       playerID: 1,
@@ -241,3 +268,20 @@ describe('jobTurns reducer', function() {
     ).toEqual(updatedState)
   });
 });
+
+describe('activePlayerTab reducer', function() {
+  it('should handle default', function() {
+    expect(
+      activePlayerTab(3, {})
+    ).toEqual(3);
+  });
+
+  it('should handle UPDATE_ACTIVE_PLAYER_TAB', function() {
+    expect(
+      activePlayerTab(undefined, {
+        type: 'UPDATE_ACTIVE_PLAYER_TAB',
+        key: 4
+      })
+    ).toEqual(4);
+  })
+})

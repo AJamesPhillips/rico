@@ -49,16 +49,6 @@ export const crops = (state = initialState, action) => {
   }
 };
 
-const removeFlopFromPool = (flop, oldPool) => {
-  let pool = [...oldPool];
-
-  for (let i = 0; i < flop.length; i++) {
-    pool = pool.slice(pool.indexOf(flop[i]), 1);
-  }
-
-  return pool;
-};
-
 const fillCropPool = () => {
   let crops = [];
 

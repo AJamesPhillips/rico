@@ -2,6 +2,16 @@ import expect from 'expect';
 import { crops } from '../../src/reducers/crops';
 
 describe('crops reducer', function() {
+  it('should handle default', function() {
+    const state = crops(undefined, {});
+
+    expect(state).toEqual({
+      pool: [],
+      flop: [],
+      discarded: []
+    });
+  });
+
   it('should handle SET_FLOP_SIZE', function() {
     expect(
       crops({}, {
