@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha --compilers js:babel-register --recursive",
-    "coverage": "nyc --reporter=lcov npm test"
+    "test": "nyc --reporter=lcov --extension .jsx mocha --compilers js:babel-register --recursive",
+    "coverage": "npm test && nyc report"
   },
   "keywords": [],
   "author": "",
