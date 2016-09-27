@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import Crop from './Crop';
+import * as actions from '../../actions';
 
 let Flop = ({
   flop,
@@ -34,15 +35,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onCropClick: (crop, flopIndex) => {
-      dispatch({
-        type: 'TAKE_FROM_FLOP',
-        flopIndex
-      });
+      dispatch(actions.takeFromFlop(flopIndex));
 
-      dispatch({
-        type: 'ADD_CROP',
-        crop
-      });
+      dispatch(actions.addCrop(crop));
     }
   };
 };

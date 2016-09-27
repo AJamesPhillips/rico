@@ -14,21 +14,9 @@ export const addPlayer = (name, doubloons) => {
   };
 }
 
-export const fillCropPool = () => {
+export const addCrop = (crop) => {
   return {
-    type: 'FILL_POOL'
-  };
-};
-
-export const revealNewFlop = () => {
-  return {
-    type: 'REVEAL_NEW_FLOP'
-  };
-};
-
-export const setFlopSize = (size) => {
-  return {
-    type: 'SET_FLOP_SIZE',
-    flopSize: size
+    type: 'ADD_CROP',
+    crop
   };
 };

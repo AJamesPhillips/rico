@@ -6,7 +6,7 @@
 // testing easier.
 
 // anyway, this file has logic related to the jobs components
-import * as actions from '../../actions/actions';
+import actions from '../../actions';
 
 export const initiateJob = (job, store) => {
   if (job.taken) {
