@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc --reporter=lcov --extension .jsx mocha --compilers js:babel-register --recursive",
-    "coverage": "npm test && nyc report"
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,7 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
     "babel-register": "^6.14.0",
+    "codecov": "^1.0.1",
     "css-loader": "^0.23.1",
     "enzyme": "^2.4.1",
     "expect": "^1.20.2",
