@@ -3,7 +3,7 @@ import { turns, jobTurns, activePlayerTab } from '../../src/reducers/turns.js';
 
 describe('turns reducer', function() {
   it('should handle default', function() {
-    expect(turns([], {})).toEqual([]);
+    expect(turns(undefined, {})).toEqual([]);
   });
 
   it('should handle INITIALIZE_TURNS', function() {
@@ -150,7 +150,7 @@ describe('turns reducer', function() {
 
 describe('jobTurns reducer', function() {
   it('should handle default', function() {
-    expect(jobTurns([], {})).toEqual([]);
+    expect(jobTurns(undefined, {})).toEqual([]);
   });
 
   it('should handle START_JOB_PHASE', function() {
