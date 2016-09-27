@@ -23,7 +23,6 @@ class Shop extends React.Component {
         <h2>Shop</h2>
         {
           state.buildings.map(building => {
-            console.log(inBuildPhase(state), buildingHasSupply(building), playerCanAffordBuilding(state, building));
             const disabled = !inBuildPhase(state) ||
                              !buildingHasSupply(building) ||
                              !playerCanAffordBuilding(state, building);

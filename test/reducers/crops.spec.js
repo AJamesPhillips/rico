@@ -50,18 +50,28 @@ describe('crops reducer', function() {
     expect(state.flop).toEqual(['corn', 'sugar'])
   });
 
+  it('should handle TAKE_FROM_FLOP', function() {
+    const state = crops({
+      flop: ['corn', 'sugar', 'tobacco']
+    }, {
+      type: 'TAKE_FROM_FLOP',
+      flopIndex: 1
+    });
+
+    expect(state.flop).toEqual(['corn', 'tobacco']);
+  });
+
   it('should handle DISCARD_LEFTOVER_FLOP', function() {
     expect(
       crops({
         flop: ['corn'],
         discarded: ['sugar']
       }, {
-        type: 'DISCARD_LEFTOVER_FLOP',
-        leftover: ['tobacco']
+        type: 'DISCARD_LEFTOVER_FLOP'
       })
     ).toEqual({
       flop: [],
-      discarded: ['sugar', 'tobacco']
+      discarded: ['sugar', 'corn']
     });
   });
 

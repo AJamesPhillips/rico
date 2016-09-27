@@ -1,4 +1,4 @@
-import { jobHasResolved } from '../jobs/service';
+import { jobHasResolved, updateActivePlayer } from '../jobs/service';
 
 export const resolvePurchase = (store, building) => {
   const state = store.getState();
@@ -52,12 +52,6 @@ export const resolvePurchase = (store, building) => {
     jobHasResolved(store);
   }
   else {
-    const updatedState = store.getState();
-    const newJobPlayer = updatedState.jobTurns.find(p => p.currentJobPlayer);
-    const newJobPlayerTabIndex = updatedState.boards.findIndex(p => p.id === newJobPlayer.playerID);
-    store.dispatch({
-      type: 'UPDATE_ACTIVE_PLAYER_TAB',
-      key: newJobPlayerTabIndex
-    });
+    updateActivePlayer(store);
   }
 }

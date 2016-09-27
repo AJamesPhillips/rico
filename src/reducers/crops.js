@@ -24,13 +24,21 @@ export const crops = (state = initialState, action) => {
         pool: state.pool.slice(state.flopSize),
         flop: state.pool.slice(0, state.flopSize)
       };
+    case 'TAKE_FROM_FLOP':
+      return {
+        ...state,
+        flop: [
+          ...state.flop.slice(0, action.flopIndex),
+          ...state.flop.slice(action.flopIndex+1)
+        ]
+      };
     case 'DISCARD_LEFTOVER_FLOP':
       return {
         ...state,
         flop: [],
         discarded: [
           ...state.discarded,
-          ...action.leftover
+          ...state.flop
         ]
       };
     case 'SHUFFLE_DISCARDED_INTO_POOL':

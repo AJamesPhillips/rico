@@ -12,6 +12,20 @@ const boards = (state = [], action) => {
           buildings: []
         }
       ];
+    case 'UPDATE_ACTIVE_PLAYER':
+      return state.map((player, index) => {
+        if (index === action.index) {
+          return {
+            ...player,
+            active: true
+          }
+        }
+
+        return {
+          ...player,
+          active: false
+        }
+      });
     case 'MODIFY_DOUBLOONS':
       return state.map(player => {
         if (player.id !== action.id) {

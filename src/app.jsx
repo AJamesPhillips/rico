@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import PlayerBoards from './components/board/PlayerBoards';
 import Jobs from './components/jobs/Jobs';
 import Shop from './components/shop/Shop';
+import Flop from './components/settler/Flop';
 import { initializeGameState } from './GameManager';
 
 import ricoApp from './reducers/index';
@@ -16,6 +17,7 @@ const RicoApp = () => {
       <Jobs />
       <PlayerBoards />
       <Shop />
+      <Flop />
     </div>
   );
 };

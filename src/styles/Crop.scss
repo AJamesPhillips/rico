@@ -1,0 +1,36 @@
+$corn: #FFFF00;
+$indigo: #0EBFE9;
+$sugar: #FFF8DC;
+$tobacco: #DEB887;
+$coffee: #4E3229;
+
+.crop {
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+}
+
+.corn {
+  background-color: $corn !important;
+  border-color: darken($corn, 5%) !important;
+}
+
+.indigo {
+  background-color: $indigo !important;
+  border-color: darken($indigo, 5%) !important;
+}
+
+.sugar {
+  background-color: $sugar !important;
+  border-color: darken($sugar, 5%) !important;
+}
+
+.tobacco {
+  background-color: $tobacco !important;
+  border-color: darken($tobacco, 5%) !important;
+}
+
+.coffee {
+  background-color: $coffee !important;
+  border-color: darken($coffee, 5%) !important;
+}

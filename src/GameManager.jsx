@@ -18,6 +18,10 @@ export const initializeGameState = (store) => {
     type: 'INITIALIZE_TURNS',
     players
   });
+  store.dispatch({
+    type: 'UPDATE_ACTIVE_PLAYER',
+    index: 0
+  });
 
   const jobs = [{
     title: 'prospector',
@@ -48,4 +52,8 @@ export const initializeGameState = (store) => {
     type: 'INITIALIZE_JOBS',
     jobs
   });
+
+  store.dispatch(actions.setFlopSize(4));
+  store.dispatch(actions.fillCropPool());
+  store.dispatch(actions.revealNewFlop());
 };

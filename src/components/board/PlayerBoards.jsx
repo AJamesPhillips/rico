@@ -25,12 +25,12 @@ class PlayerBoards extends React.Component {
 
     return (
       <Tabs
-        activeKey={state.activePlayerTab}
+        activeKey={state.boards.findIndex(p => p.active)}
         id={'0'}
-        onSelect={(key) => {
+        onSelect={(index) => {
           store.dispatch({
-            type: 'UPDATE_ACTIVE_PLAYER_TAB',
-            key
+            type: 'UPDATE_ACTIVE_PLAYER',
+            index
           });
         }}
         >
