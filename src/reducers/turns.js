@@ -92,13 +92,3 @@ export const jobTurns = (state = [], action) => {
       return state;
   }
 };
-
-export const activePlayerTab = (state = 0, action) => {
-  switch (action.type) {
-    case 'UPDATE_ACTIVE_PLAYER_TAB':
-      return action.key;
-    default:
-      return state;
-  }
-};
-

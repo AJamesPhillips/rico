@@ -47,7 +47,7 @@ Shop.contextTypes = {
 };
 
 const inBuildPhase = (state) => {
-  return state.jobTurns.find(player => player.currentJobPlayer) !== undefined;
+  return state.activeJob === 'builder';
 };
 
 const buildingHasSupply = (building) => {

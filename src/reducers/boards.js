@@ -9,7 +9,8 @@ const boards = (state = [], action) => {
           name: action.name,
           id: idCounter++,
           doubloons: action.doubloons,
-          buildings: []
+          buildings: [],
+          crops: []
         }
       ];
     case 'UPDATE_ACTIVE_PLAYER':
@@ -53,7 +54,26 @@ const boards = (state = [], action) => {
             }
           ]
         };
-      })
+      });
+    case 'ADD_CROP':
+      const activeID = state.findIndex(p => p.active);
+
+      return state.map((player, index) => {
+        if (index !== activeID) {
+          return player;
+        }
+
+        return {
+          ...player,
+          crops: [
+            ...player.crops,
+            {
+              name: action.crop,
+              colonists: [false]
+            }
+          ]
+        };
+      });
     default:
       return state;
   }

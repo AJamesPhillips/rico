@@ -268,20 +268,3 @@ describe('jobTurns reducer', function() {
     ).toEqual(updatedState)
   });
 });
-
-describe('activePlayerTab reducer', function() {
-  it('should handle default', function() {
-    expect(
-      activePlayerTab(3, {})
-    ).toEqual(3);
-  });
-
-  it('should handle UPDATE_ACTIVE_PLAYER_TAB', function() {
-    expect(
-      activePlayerTab(undefined, {
-        type: 'UPDATE_ACTIVE_PLAYER_TAB',
-        key: 4
-      })
-    ).toEqual(4);
-  })
-})

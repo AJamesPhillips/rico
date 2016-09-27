@@ -2,7 +2,7 @@ import * as React from 'react';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 
-const fillEmptyBuildingSpaces = (buildingCount) => {
+const fillEmptyCropSpaces = (buildingCount) => {
   let emptySpaces = [];
   for (var i = buildingCount; i < 12; i++) {
     emptySpaces.push('nothing here!');
@@ -11,29 +11,29 @@ const fillEmptyBuildingSpaces = (buildingCount) => {
   return emptySpaces;
 };
 
-const PlayerBuildings = ({
-  buildings
+const PlayerCrops = ({
+  crops
 }) => {
   return (
     <Row>
       {
-        buildings.map(building =>
+        crops.map(crop =>
           <Col
-            key={building.name}
+            key={crop.name}
             sm={3}
-            className="occupied-building-space">
-            {building.name}
+            className="occupied-crop-space">
+            {crop.name}
           </Col>
         )
       }
       {
         // print out empty columns for leftover spaces
-        fillEmptyBuildingSpaces(buildings.length).map((space, index) => {
+        fillEmptyCropSpaces(crops.length).map((space, index) => {
           return (
             <Col
               key={index}
               sm={3}
-              className="empty-building-space">
+              className="empty-crop-space">
               Empty
             </Col>
           )
@@ -43,4 +43,4 @@ const PlayerBuildings = ({
   );
 };
 
-export default PlayerBuildings;
+export default PlayerCrops;

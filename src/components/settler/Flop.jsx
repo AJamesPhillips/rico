@@ -28,7 +28,8 @@ let Flop = ({
 
 const mapStateToProps = (state) => {
   return {
-    flop: state.crops.flop
+    flop: state.crops.flop,
+    settlerPhase: state.activeJob === 'settler'
   };
 };
 

@@ -24,16 +24,6 @@ export const jobs = (state = [], action) => {
         }
         return job;
       })
-    case 'ADD_JOB':
-      return [
-        ...state,
-        {
-          title: action.title,
-          id: action.id,
-          taken: false,
-          incentive: 0
-        }
-      ]
     case 'INCENTIVIZE_UNTAKEN_JOBS':
       return state.map(job => {
         if (job.taken) {
@@ -56,3 +46,11 @@ export const jobs = (state = [], action) => {
   }
 }
 
+export const activeJob = (state = '', action) => {
+  switch (action.type) {
+    case 'SET_ACTIVE_JOB':
+      return action.job;
+    default:
+      return state;
+  }
+}

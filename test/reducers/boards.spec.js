@@ -18,7 +18,8 @@ describe('boards reducer', function() {
         name: 'mockPlayer',
         id: 0,
         doubloons: 3,
-        buildings: []
+        buildings: [],
+        crops: []
       }
     ]);
   });
@@ -109,5 +110,41 @@ describe('boards reducer', function() {
 
     expect(boards(state, action)).toEqual(expectedState);
   });
+
+  it('should handle ADD_CROP', function() {
+    const state = [{
+      id: 0,
+      name: 'mockPlayer',
+      crops: [],
+      active: true
+    }, {
+      id: 1,
+      name: 'mockPlayer2',
+      crops: [],
+      active: false
+    }];
+
+    const action = {
+      type: 'ADD_CROP',
+      crop: 'corn'
+    };
+
+    const expectedState = [{
+      id: 0,
+      name: 'mockPlayer',
+      crops: [{
+        name: 'corn',
+        colonists: [false]
+      }],
+      active: true
+    }, {
+      id: 1,
+      name: 'mockPlayer2',
+      crops: [],
+      active: false
+    }];
+
+    expect(boards(state, action)).toEqual(expectedState);
+  })
 });
 

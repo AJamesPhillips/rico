@@ -22,6 +22,11 @@ export const initiateJob = (job, store) => {
   });
 
   store.dispatch({
+    type: 'SET_ACTIVE_JOB',
+    job: job.title
+  });
+
+  store.dispatch({
     type: 'START_JOB_PHASE',
     playerTurns: store.getState().turns,
   });
