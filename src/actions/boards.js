@@ -20,3 +20,10 @@ export const addCrop = (crop) => {
     crop
   };
 };
+
+export const updateActivePlayer = (index) => {
+  return {
+    type: 'UPDATE_ACTIVE_PLAYER',
+    index
+  };
+};

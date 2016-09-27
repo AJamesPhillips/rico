@@ -5,5 +5,5 @@ const actions = {
   ...crops,
   ...boards
 };
-console.log(actions, crops);
+
 export default actions;

@@ -84,10 +84,7 @@ export const updateActivePlayer = (store) => {
   const currentPlayerID = store.getState().turns.find(p => p.currentPlayer).playerID;
   const index = store.getState().boards.findIndex(p => p.id === currentPlayerID );
 
-  store.dispatch({
-    type: 'UPDATE_ACTIVE_PLAYER',
-    index
-  });
+  store.dispatch(actions.updateActivePlayer(index));
 };
 
 export const startNextRound = (store) => {

@@ -81,6 +81,33 @@ describe('boards reducer', function() {
       name: 'Small Market',
       colonists: [false]
     }])
-  })
+  });
+
+  it('should handle UPDATE_ACTIVE_PLAYER', function() {
+    const state = [{
+      id: 0,
+      name: 'mockPlayer'
+    }, {
+      id: 1,
+      name: 'mockPlayer2'
+    }];
+
+    const expectedState = [{
+      id: 0,
+      name: 'mockPlayer',
+      active: false
+    }, {
+      id: 1,
+      name: 'mockPlayer2',
+      active: true
+    }];
+
+    const action = {
+      type: 'UPDATE_ACTIVE_PLAYER',
+      index: 1
+    };
+
+    expect(boards(state, action)).toEqual(expectedState);
+  });
 });
 

@@ -7,6 +7,7 @@ import Tab from 'react-bootstrap/lib/Tab';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import PlayerBoard from './PlayerBoard';
+import actions from '../../actions';
 
 let PlayerBoards = ({
   activeTab,
@@ -42,10 +43,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onTabSelect: (index) => {
-      dispatch({
-        type: 'UPDATE_ACTIVE_PLAYER',
-        index
-      })
+      dispatch(actions.updateActivePlayer(index));
     }
   };
 }
