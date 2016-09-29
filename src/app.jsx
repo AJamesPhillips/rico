@@ -1,7 +1,8 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
 
 import PlayerBoards from './components/board/PlayerBoards';
 import Jobs from './components/jobs/Jobs';
@@ -22,7 +23,13 @@ const RicoApp = () => {
   );
 };
 
-let store = createStore(ricoApp, window.devToolsExtension && window.devToolsExtension());
+let store = createStore(
+  ricoApp,
+  window.devToolsExtension && window.devToolsExtension(),
+  applyMiddleware(
+    thunkMiddleware
+  )
+);
 
 initializeGameState(store);
 

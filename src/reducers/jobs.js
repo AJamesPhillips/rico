@@ -38,7 +38,8 @@ export const jobs = (state = [], action) => {
       return state.map(job => {
         return {
           ...job,
-          taken: false
+          taken: false,
+          takenBy: undefined
         };
       })
     default:

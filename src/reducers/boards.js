@@ -28,8 +28,10 @@ const boards = (state = [], action) => {
         }
       });
     case 'MODIFY_DOUBLOONS':
-      return state.map(player => {
-        if (player.id !== action.id) {
+      const activeIndex = state.findIndex(p => p.active);
+
+      return state.map((player,index) => {
+        if (index !== activeIndex) {
           return player;
         }
 
@@ -39,8 +41,13 @@ const boards = (state = [], action) => {
         };
       });
     case 'ADD_BUILDING':
-      return state.map(player => {
-        if (player.id !== action.id) {
+      // the number is because babel thinks you can't
+      // declare variables multiple times in different
+      // case blocks. dumb dumb dumb
+      const activeIndex2 = state.findIndex(p => p.active);
+
+      return state.map((player, index) => {
+        if (index !== activeIndex2) {
           return player;
         }
 
@@ -56,10 +63,11 @@ const boards = (state = [], action) => {
         };
       });
     case 'ADD_CROP':
-      const activeID = state.findIndex(p => p.active);
+      // see above for number in variable name
+      const activeIndex3 = state.findIndex(p => p.active);
 
       return state.map((player, index) => {
-        if (index !== activeID) {
+        if (index !== activeIndex3) {
           return player;
         }
 

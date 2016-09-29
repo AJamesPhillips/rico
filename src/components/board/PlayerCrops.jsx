@@ -16,10 +16,11 @@ const PlayerCrops = ({
 }) => {
   return (
     <Row>
+      <p style={{paddingLeft: '20px'}}>Crops</p>
       {
-        crops.map(crop =>
+        crops.map((crop,index) =>
           <Col
-            key={crop.name}
+            key={index}
             sm={3}
             className="occupied-crop-space">
             {crop.name}

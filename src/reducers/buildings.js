@@ -3,15 +3,15 @@ const buildingsInitialState = [
   {
     name: 'Small Market',
     cost: 1,
-    supply: 2,
-    initialSupply: 2,
+    supply: 5,
+    initialSupply: 5,
     colonists: [false]
   },
   {
     name: 'University',
     cost: 8,
-    supply: 2,
-    initialSupply: 2,
+    supply: 5,
+    initialSupply: 5,
     colonists: [false]
   }
 ];

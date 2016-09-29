@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PlayerStatus from './status';
 import DoubloonCounter from './DoubloonCounter';
 import PlayerBuildings from './PlayerBuildings';
+import PlayerCrops from './PlayerCrops';
 
 import '../../styles/PlayerBoard.scss';
 
@@ -22,6 +23,7 @@ let PlayerBoard = ({
       />
       <DoubloonCounter doubloons={board.doubloons} />
       <PlayerBuildings buildings={board.buildings || []} />
+      <PlayerCrops crops={board.crops || []} />
     </div>
   )
 };

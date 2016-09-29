@@ -5,12 +5,14 @@ import '../../styles/Crop.scss';
 const Crop = ({
   crop,
   flopIndex,
-  onClick
+  onClick,
+  disabled
 }) => {
   return (
     <Button
       onClick={() => onClick(crop, flopIndex)}
       className={crop + ' crop'}
+      disabled={disabled}
     />
   );
 }

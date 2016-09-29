@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import Crop from './Crop';
-import * as actions from '../../actions';
+import actions from '../../actions';
 
 let Flop = ({
   flop,
-  onCropClick
+  onCropClick,
+  settlerPhase
 }) => {
   return (
     <div>
@@ -18,6 +19,7 @@ let Flop = ({
               crop={crop}
               flopIndex={index}
               onClick={onCropClick}
+              disabled={!settlerPhase}
             />
           )
         })
@@ -39,6 +41,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actions.takeFromFlop(flopIndex));
 
       dispatch(actions.addCrop(crop));
+
+      dispatch(actions.handleEndOfTurn());
     }
   };
 };

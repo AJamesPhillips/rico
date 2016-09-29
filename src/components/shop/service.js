@@ -1,4 +1,5 @@
 import { jobHasResolved, updateActivePlayer } from '../jobs/service';
+import actions from '../../actions';
 
 export const resolvePurchase = (store, building) => {
   const state = store.getState();
@@ -44,14 +45,12 @@ export const resolvePurchase = (store, building) => {
     doubloons: -building.cost + discount
   });
 
-  store.dispatch({
-    type: 'NEXT_JOB_TURN'
-  });
+  store.dispatch(actions.handleEndOfTurn());
 
-  if (currentJobPlayerIndex + 1 === state.jobTurns.length) {
+/*  if (currentJobPlayerIndex + 1 === state.jobTurns.length) {
     jobHasResolved(store);
   }
   else {
     updateActivePlayer(store);
-  }
+  } */
 }
