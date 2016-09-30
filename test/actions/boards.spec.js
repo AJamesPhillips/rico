@@ -45,4 +45,13 @@ describe('boards actions', function() {
 
     expect(actions.addCrop('corn')).toEqual(expectedAction)
   });
+
+  it('ADD_BUILDING', function() {
+    const expectedAction = {
+      type: 'ADD_BUILDING',
+      building: {}
+    };
+
+    expect(actions.addBuilding({})).toEqual(expectedAction);
+  });
 });
