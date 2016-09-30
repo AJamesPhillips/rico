@@ -28,7 +28,8 @@ describe('boards reducer', function() {
     var state = [{
       name: 'mockPlayer',
       id: 0,
-      doubloons: 3
+      doubloons: 3,
+      active: true
     }, {
       name: 'mockPlayer2',
       id: 1,
@@ -38,7 +39,8 @@ describe('boards reducer', function() {
     var newState = [{
       name: 'mockPlayer',
       id: 0,
-      doubloons: 5
+      doubloons: 5,
+      active: true
     }, {
       name: 'mockPlayer2',
       id: 1,
@@ -47,7 +49,6 @@ describe('boards reducer', function() {
 
     var action = {
       type: 'MODIFY_DOUBLOONS',
-      id: 0,
       doubloons: 2
     };
 
@@ -69,7 +70,8 @@ describe('boards reducer', function() {
     const state = [{
       id: 0,
       name: 'mockPlayer',
-      buildings: []
+      buildings: [],
+      active: true
     }, {
       id: 1,
       name: 'mockPlayer2',

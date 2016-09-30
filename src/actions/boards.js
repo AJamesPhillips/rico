@@ -3,8 +3,8 @@ export const modifyDoubloons = (value, playerID) => {
     type: 'MODIFY_DOUBLOONS',
     id: playerID,
     doubloons: value
-  }
-}
+  };
+};
 
 export const addPlayer = (name, doubloons) => {
   return {
@@ -18,6 +18,13 @@ export const addCrop = (crop) => {
   return {
     type: 'ADD_CROP',
     crop
+  };
+};
+
+export const addBuilding = (building) => {
+  return {
+    type: 'ADD_BUILDING',
+    building
   };
 };
 

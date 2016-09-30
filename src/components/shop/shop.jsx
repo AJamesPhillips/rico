@@ -1,65 +1,86 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Building from './Building';
-import { resolvePurchase } from './service';
-class Shop extends React.Component {
-  componentDidMount() {
-    this.unsubscribe = this.context.store.subscribe(() =>
-      this.forceUpdate()
-    );
-  }
+import actions from '../../actions';
 
-  componentWillUnMount() {
-    this.unsubscribe();
-  }
-
-  render() {
-    const props = this.props;
-    const { store } = this.context;
-    const state = store.getState();
-
-    return (
-      <div>
-        <h2>Shop</h2>
-        {
-          state.buildings.map(building => {
-            const disabled = !inBuildPhase(state) ||
-                             !buildingHasSupply(building) ||
-                             !playerCanAffordBuilding(state, building);
-            return (
-              <Building
-                key={building.name}
-                name={building.name}
-                cost={building.cost}
-                disabled={disabled}
-                supply={building.supply + '/' + building.initialSupply}
-                onClick={() => resolvePurchase(store, building)}
-              />
-            );
-          })
-        }
-      </div>
-    );
-  }
-}
-Shop.contextTypes = {
-  store: React.PropTypes.object
+let Shop = ({
+  buildings,
+  onBuildingClick,
+  inBuildPhase,
+  buildingHasSupply,
+  playerCanAffordBuilding
+}) => {
+  return (
+    <div>
+      <h2>Shop</h2>
+      {
+        buildings.map(building => {
+          const disabled = !inBuildPhase(state) ||
+                           !buildingHasSupply(building) ||
+                           !playerCanAffordBuilding(state, building);
+          return (
+            <Building
+              key={building.name}
+              name={building.name}
+              cost={building.cost}
+              disabled={disabled}
+              supply={building.supply + '/' + building.initialSupply}
+              onClick={() => resolvePurchase(store, building)}
+            />
+          );
+        })
+      }
+    </div>
+  );
 };
 
-const inBuildPhase = (state) => {
-  return state.activeJob === 'builder';
+
+const mapStateToProps = (state) => {
+  return {state};
 };
 
-const buildingHasSupply = (building) => {
-  return building.supply > 0;
+const mapDispatchToProps = (dispatch) => {
+  return {dispatch};
 };
 
-const playerCanAffordBuilding = (state, building) => {
-  const cost = building.cost;
-  const currentPlayer = state.turns.find(p => p.currentPlayer) || {};
-  const player = state.boards.find(player => player.id === currentPlayer.playerID) || {};
+const mergeProps = ({state}, {dispatch}) => {
+  return {
+    inBuildPhase: () => {
+      return state.activeJob === 'settler';
+    },
+    buildingHasSupply: (building) => {
+      return building.supply > 0;
+    },
+    playerCanAffordBuilding: (building) => {
+      const cost = building.cost;
+      const currentPlayer = state.turns.find(p => p.currentPlayer) || {};
+      const player = state.boards.find(player => player.id === currentPlayer.playerID) || {};
 
-  return player.doubloons >= cost;
+      return player.doubloons >= cost;
+    }
+    resolvePurchase: (building) => {
+      dispatch(actions.addBuilding(building));
+      dispatch(actions.reduceBuildingSupply(building));
+
+      const currentJobPlayerID = state.jobTurns.find(t => t.currentJobPlayer).playerID;
+      let discount = 0;
+      // check if the buyer has the Builder privilege
+      if (state.jobs.find(job => job.title === 'builder' && job.takenBy === currentJobPlayerID)) {
+        discount = 1;
+      }
+      // eventually check if the buyer has staffed quarries
+
+      dispatch(actions.modifyDoubloons(-building.cost + discount));
+
+      dispatch(actions.handleEndOfTurn());
+    }
+  };
 };
+
+Shop = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(Shop);
 
 export default Shop;

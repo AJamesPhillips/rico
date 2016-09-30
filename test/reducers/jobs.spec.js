@@ -141,12 +141,14 @@ describe('jobs reducer', function() {
     const expectedState = [{
       title: 'builder',
       id: 0,
-      taken: false
+      taken: false,
+      takenBy: undefined
     },
     {
       title: 'settler',
       id: 1,
-      taken: false
+      taken: false,
+      takenBy: undefined
     }];
 
     expect(jobs(state, action)).toEqual(expectedState);
