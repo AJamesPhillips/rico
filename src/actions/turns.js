@@ -2,6 +2,13 @@ import { updateActivePlayer } from './boards';
 import { setActiveJob, incentivizeUntakenJobs, resetJobs } from './jobs';
 import { discardLeftoverFlop, revealNewFlop } from './crops';
 
+export const initializeTurns = (players) => {
+  return {
+    type: 'INITIALIZE_TURNS',
+    players
+  };
+};
+
 export const startJobPhase = (playerTurns) => {
   return {
     type: 'START_JOB_PHASE',
@@ -33,41 +40,38 @@ export const nextRound = () => {
   };
 };
 
-export const jobHasResolved = () => {
-  return (dispatch, getState) => {
-    dispatch(setActiveJob(''));
+export const jobHasResolved = () => (dispatch, getState) => {
+  dispatch(setActiveJob(''));
 
-    dispatch(endJobPhase());
+  dispatch(endJobPhase());
 
-    dispatch(nextTurn());
+  dispatch(nextTurn());
 
-    if (getState().turns.findIndex(t => t.currentPlayer) === -1) {
-      dispatch(nextRound());
+  if (getState().turns.findIndex(t => t.currentPlayer) === -1) {
+    dispatch(nextRound());
 
-      dispatch(incentivizeUntakenJobs());
+    dispatch(incentivizeUntakenJobs());
 
-      dispatch(resetJobs());
-    }
+    dispatch(resetJobs());
   }
 }
 
-export const handleEndOfTurn = () => {
-  return (dispatch, getState) => {
-    dispatch(nextJobTurn());
+export const handleEndOfTurn = () => (dispatch, getState) => {
+  dispatch(nextJobTurn());
 
-    const currentJobPlayerIndex = getState().jobTurns.findIndex(t => t.currentJobPlayer);
-    if (currentJobPlayerIndex === -1) {
-      if (getState().activeJob === 'settler') {
-        dispatch(discardLeftoverFlop());
-        dispatch(revealNewFlop());
-      }
-
-      dispatch(jobHasResolved());
-
-      const currentPlayerIndex = getState().turns.findIndex(t => t.currentPlayer);
-      dispatch(updateActivePlayer(currentPlayerIndex));
-    } else {
-      dispatch(updateActivePlayer(getState().jobTurns[currentJobPlayerIndex].playerID));
+  const currentJobPlayerIndex = getState().jobTurns.findIndex(t => t.currentJobPlayer);
+  if (currentJobPlayerIndex === -1) {
+    if (getState().activeJob === 'settler') {
+      dispatch(discardLeftoverFlop());
+      dispatch(revealNewFlop());
     }
+
+    dispatch(jobHasResolved());
+
+    const currentPlayerIndex = getState().turns.findIndex(t => t.currentPlayer);
+    dispatch(updateActivePlayer(currentPlayerIndex));
+  } else {
+    dispatch(updateActivePlayer(getState().jobTurns[currentJobPlayerIndex].playerID));
   }
 }
+

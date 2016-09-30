@@ -1,5 +1,6 @@
 import expect from 'expect';
 import { turns, jobTurns, activePlayerTab } from '../../src/reducers/turns.js';
+import actions from '../../src/actions';
 
 describe('turns reducer', function() {
   it('should handle default', function() {
@@ -7,7 +8,7 @@ describe('turns reducer', function() {
   });
 
   it('should handle INITIALIZE_TURNS', function() {
-    const playerState = [{
+    const playerTurns = [{
       name: 'playerOne',
       id: 0
     }, {
@@ -18,12 +19,7 @@ describe('turns reducer', function() {
       id: 2
     }];
 
-    expect(
-      turns([], {
-        players: playerState,
-        type: 'INITIALIZE_TURNS'
-      })
-    ).toEqual([
+    const newState = [
       {
         playerID: 0,
         currentPlayer: true
@@ -36,7 +32,10 @@ describe('turns reducer', function() {
         playerID: 2,
         currentPlayer: false
       }
-    ]);
+    ];
+    expect(
+      turns([], actions.initializeTurns(playerTurns))
+    ).toEqual(newState);
   });
 
   it('should handle NEXT_TURN', function() {
@@ -55,11 +54,7 @@ describe('turns reducer', function() {
       }
     ];
 
-    expect(
-      turns(initialState, {
-        type: 'NEXT_TURN'
-      })
-    ).toEqual([
+    const newState = [
       {
         playerID: 0,
         currentPlayer: false
@@ -72,7 +67,11 @@ describe('turns reducer', function() {
         playerID: 2,
         currentPlayer: false
       }
-    ]);
+    ];
+
+    expect(
+      turns(initialState, actions.nextTurn())
+    ).toEqual(newState);
   });
 
   it('should remove currentPlayer at the end of a round', function() {
@@ -91,11 +90,7 @@ describe('turns reducer', function() {
       }
     ];
 
-    expect(
-      turns(initialState, {
-        type: 'NEXT_TURN'
-      })
-    ).toEqual([
+    const newState = [
       {
         playerID: 0,
         currentPlayer: false
@@ -108,7 +103,11 @@ describe('turns reducer', function() {
         playerID: 2,
         currentPlayer: false
       }
-    ]);
+    ];
+
+    expect(
+      turns(initialState, actions.nextTurn())
+    ).toEqual(newState);
   });
 
   it('should handle NEXT_ROUND', function() {
@@ -127,11 +126,7 @@ describe('turns reducer', function() {
       }
     ];
 
-    expect(
-      turns(initialState, {
-        type: 'NEXT_ROUND'
-      })
-    ).toEqual([
+    const newState = [
       {
         playerID: 1,
         currentPlayer: true
@@ -144,7 +139,11 @@ describe('turns reducer', function() {
         playerID: 0,
         currentPlayer: false
       }
-    ]);
+    ];
+
+    expect(
+      turns(initialState, actions.nextRound())
+    ).toEqual(newState);
   });
 });
 
