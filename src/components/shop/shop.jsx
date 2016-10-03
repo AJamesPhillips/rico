@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import Building from './Building';
 import actions from '../../actions';
 
@@ -15,9 +16,9 @@ let Shop = ({
       <h2>Shop</h2>
       {
         buildings.map(building => {
-          const disabled = !inBuildPhase(state) ||
-                           !buildingHasSupply(building) ||
-                           !playerCanAffordBuilding(state, building);
+          const disabled = !inBuildPhase() ||
+                           !buildingHasSupply() ||
+                           !playerCanAffordBuilding();
           return (
             <Building
               key={building.name}
@@ -45,6 +46,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mergeProps = ({state}, {dispatch}) => {
   return {
+    buildings: state.buildings,
     inBuildPhase: () => {
       return state.activeJob === 'settler';
     },
@@ -57,7 +59,7 @@ const mergeProps = ({state}, {dispatch}) => {
       const player = state.boards.find(player => player.id === currentPlayer.playerID) || {};
 
       return player.doubloons >= cost;
-    }
+    },
     resolvePurchase: (building) => {
       dispatch(actions.addBuilding(building));
       dispatch(actions.reduceBuildingSupply(building));

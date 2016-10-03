@@ -11,7 +11,9 @@ let PlayerBoard = ({
   board,
   governor,
   isCurrentPlayer,
-  isCurrentJobPlayer
+  isCurrentJobPlayer,
+  mayorPhase,
+  yourBoard
 }) => {
   return (
     <div className="player-board">
@@ -22,8 +24,14 @@ let PlayerBoard = ({
         isCurrentJobPlayer={isCurrentJobPlayer}
       />
       <DoubloonCounter doubloons={board.doubloons} />
-      <PlayerBuildings buildings={board.buildings || []} />
-      <PlayerCrops crops={board.crops || []} />
+      <PlayerBuildings
+        buildings={board.buildings || []}
+        canPlaceColonists={mayorPhase && yourBoard}
+      />
+      <PlayerCrops
+        crops={board.crops || []}
+        canPlaceColonists={mayorPhase && yourBoard}
+      />
     </div>
   )
 };
@@ -31,11 +39,13 @@ let PlayerBoard = ({
 const mapStateToProps = (state, ownProps) => {
   const currentPlayer = state.turns.find(p => p.currentPlayer) || {};
   const currentJobPlayer = state.jobTurns.find(p => p.currentJobPlayer) || {};
-
+  const currentPlayerBoardIndex = state.boards.findIndex(p => p.id === currentPlayer.playerID);
   return {
     governor: state.turns[0].playerID === ownProps.board.id,
-    currentPlayer: currentPlayer.playerID === ownProps.board.id,
-    currentJobPlayer: currentJobPlayer.playerID === ownProps.board.id
+    isCurrentPlayer: currentPlayer.playerID === ownProps.board.id,
+    isCurrentJobPlayer: currentJobPlayer.playerID === ownProps.board.id,
+    mayorPhase: state.activeJob === 'mayor',
+    yourBoard: !!state.boards.find(p => p.active && p.id === currentJobPlayer.playerID)
   };
 };
 

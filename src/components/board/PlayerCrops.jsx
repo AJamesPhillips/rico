@@ -12,7 +12,8 @@ const fillEmptyCropSpaces = (buildingCount) => {
 };
 
 const PlayerCrops = ({
-  crops
+  crops,
+  mayorPhase
 }) => {
   return (
     <Row>
@@ -24,6 +25,15 @@ const PlayerCrops = ({
             sm={3}
             className="occupied-crop-space">
             {crop.name}
+            <Colonist
+              visible={crop.colonists[0]}
+            />
+            <AddColonist
+              visible={mayorPhase}
+            />
+            <RemoveColonist
+              visible={mayorPhase}
+            />
           </Col>
         )
       }
