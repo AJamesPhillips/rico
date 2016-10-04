@@ -7,7 +7,7 @@ function setup(props) {
   return shallow(<DoubloonCounter {...props} />);
 }
 
-describe('DoubloonCounter component', function() {
+describe('<DoubloonCounter>', function() {
   it('should render correctly', function() {
     const component = setup({
       doubloons: 3

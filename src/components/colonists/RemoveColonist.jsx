@@ -6,9 +6,9 @@ const RemoveColonist = ({
 }) => {
   return (
     <span
-      class="glyphicon glyphicon-minus"
+      className="glyphicon glyphicon-minus"
       onClick={onClick}
-      style={{display: visible}}
+      style={{display: visible ? 'inline' : 'none'}}
     ></span>
   );
 };
