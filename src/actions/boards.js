@@ -1,7 +1,6 @@
-export const modifyDoubloons = (value, playerID) => {
+export const modifyDoubloons = (value) => {
   return {
     type: 'MODIFY_DOUBLOONS',
-    id: playerID,
     doubloons: value
   };
 };

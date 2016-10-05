@@ -35,12 +35,6 @@ export const initiateJob = (job, store) => {
     resolveTakenIncentive(store, job, currentPlayerID);
   }
 
-  store.dispatch({
-    type: 'PLAYER_JOB_PICKED',
-    playerID: currentPlayerID,
-    jobID: job.id
-  });
-
   if (job.title === 'prospector') {
     resolveProspector(store, currentPlayerID);
 

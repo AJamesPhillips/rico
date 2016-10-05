@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import chai from 'chai';
-const { expect } = chai;
 import { createSpy } from 'expect';
 import chaiEnzyme from 'chai-enzyme';
 import RemoveColonist from '../../../src/components/colonists/RemoveColonist';
@@ -19,7 +18,7 @@ describe('<RemoveColonist>', function() {
       visible: true
     });
 
-    expect(component).to.have.className('glyphicon-minus');
+    chai.expect(component).to.have.className('glyphicon-minus');
   });
 
   it('should hide if visible prop is false', function() {
@@ -28,7 +27,7 @@ describe('<RemoveColonist>', function() {
       visible: false
     });
 
-    expect(component).to.have.style('display', 'none');
+    chai.expect(component).to.have.style('display', 'none');
   });
 
   it('should trigger given onClick prop', function() {
@@ -41,7 +40,7 @@ describe('<RemoveColonist>', function() {
 
     component.simulate('click');
 
-    expect(clickSpy.calls.length).to.equal(1);
+    chai.expect(clickSpy.calls.length).to.equal(1);
   })
 
 

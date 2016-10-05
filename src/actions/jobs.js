@@ -5,12 +5,13 @@ export const initializeJobs = (jobs) => {
   };
 };
 
-export const takeJob = (id, takenBy) => {
-  return {
+export const takeJob = (id) => (dispatch, getState) => {
+  const currentPlayerID = getState().turns.find(p => p.currentPlayer).playerID;
+  dispatch({
     type: 'TAKE_JOB',
     id,
-    takenBy
-  };
+    takenBy: currentPlayerID
+  });
 };
 
 export const disincentivizeTakenJob = (id) => {

@@ -9,7 +9,8 @@ export const initializeTurns = (players) => {
   };
 };
 
-export const startJobPhase = (playerTurns) => {
+export const startJobPhase = () => (dispatch, getState) => {
+  const playerTurns = getState().turns;
   return {
     type: 'START_JOB_PHASE',
     playerTurns
@@ -68,8 +69,8 @@ export const handleEndOfTurn = () => (dispatch, getState) => {
 
     dispatch(jobHasResolved());
 
-    const currentPlayerIndex = getState().turns.findIndex(t => t.currentPlayer);
-    dispatch(updateActivePlayer(currentPlayerIndex));
+    const currentPlayerID = getState().turns.find(t => t.currentPlayer).playerID;
+    dispatch(updateActivePlayer(currentPlayerID));
   } else {
     dispatch(updateActivePlayer(getState().jobTurns[currentJobPlayerIndex].playerID));
   }

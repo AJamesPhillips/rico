@@ -8,7 +8,7 @@ const AddColonist = ({
     <span
       class="glyphicon glyphicon-plus"
       onClick={onClick}
-      style={{display: visible}}
+      style={{display: visible ? 'inline' : 'none'}}
     ></span>
   );
 };

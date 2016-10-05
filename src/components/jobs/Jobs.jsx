@@ -2,49 +2,70 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
-
 import JobCard from './JobCard';
-import { initiateJob } from './service';
+import actions from '../../actions';
 
-class Jobs extends React.Component {
-  componentDidMount() {
-    this.unsubscribe = this.context.store.subscribe(() =>
-      this.forceUpdate()
-    );
-  }
-
-  componentWillUnMount() {
-    this.unsubscribe();
-  }
-
-  render() {
-    const props = this.props;
-    const { store } = this.context;
-    const state = store.getState();
-
-    return (
-      <Row>
-        {state.jobs.map(job => {
-          return (
-            <Col md={2} key={job.id}>
-              <JobCard
-              taken={job.taken}
-              title={job.title}
-              incentive={job.incentive}
-              key={job.id}
-              onClick={() => {
-                initiateJob(job, store);
-              }}
-              />
-            </Col>
-          );
-        })}
-      </Row>
-    );
-  }
-}
-Jobs.contextTypes = {
-  store: React.PropTypes.object
+let Jobs = ({
+  jobs,
+  initiateJob
+}) => {
+  return (
+    <Row>
+      {jobs.map(job => {
+        return (
+          <Col md={2} key={job.id}>
+            <JobCard
+            taken={job.taken}
+            title={job.title}
+            incentive={job.incentive}
+            key={job.id}
+            onClick={() => {
+              initiateJob(job);
+            }}
+            />
+          </Col>
+        );
+      })}
+    </Row>
+  );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    jobs: state.jobs
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    initiateJob: (job) => {
+      if (job.taken) {
+        return;
+      }
+
+      dispatch(actions.takeJob(job.id));
+
+      dispatch(actions.setActiveJob(job.title));
+
+      dispatch(actions.startJobPhase());
+
+      if (job.incentive > 0) {
+        dispatch(actions.modifyDoubloons(job.incentive));
+        dispatch(actions.disincentivizeTakenjob(job.id));
+      }
+
+      if (job.title === 'prospector') {
+        dispatch(actions.modifyDoubloons(1));
+
+        dispatch(actions.handleEndOfTurn());
+      }
+    }
+  };
+};
+
+Jobs = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Jobs);
 
 export default Jobs;
