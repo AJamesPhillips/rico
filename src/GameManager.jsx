@@ -53,6 +53,12 @@ export const initializeGameState = (store) => {
     id: 4,
     incentive: 0,
     taken: false
+  },
+  {
+    title: 'mayor',
+    id: 5,
+    incentive: 0,
+    taken: false
   }];
 
   store.dispatch({

@@ -11,10 +11,10 @@ export const initializeTurns = (players) => {
 
 export const startJobPhase = () => (dispatch, getState) => {
   const playerTurns = getState().turns;
-  return {
+  dispatch({
     type: 'START_JOB_PHASE',
     playerTurns
-  };
+  });
 };
 
 export const nextJobTurn = () => {
@@ -54,25 +54,30 @@ export const jobHasResolved = () => (dispatch, getState) => {
     dispatch(incentivizeUntakenJobs());
 
     dispatch(resetJobs());
+
   }
+
+  const currentPlayer = getState().turns.find(t => t.currentPlayer) || {};
+  dispatch(updateActivePlayer(currentPlayer.playerID));
 }
 
 export const handleEndOfTurn = () => (dispatch, getState) => {
   dispatch(nextJobTurn());
 
   const currentJobPlayerIndex = getState().jobTurns.findIndex(t => t.currentJobPlayer);
-  if (currentJobPlayerIndex === -1) {
-    if (getState().activeJob === 'settler') {
-      dispatch(discardLeftoverFlop());
-      dispatch(revealNewFlop());
-    }
-
-    dispatch(jobHasResolved());
-
-    const currentPlayerID = getState().turns.find(t => t.currentPlayer).playerID;
-    dispatch(updateActivePlayer(currentPlayerID));
-  } else {
+  // there are still turns left in the job phase
+  if (currentJobPlayerIndex !== -1) {
+    const currentPlayerJobIndex = getState().jobTurns.findIndex(t => t.currentJobPlayer);
     dispatch(updateActivePlayer(getState().jobTurns[currentJobPlayerIndex].playerID));
+
+    return;
   }
+
+  if (getState().activeJob === 'settler') {
+    dispatch(discardLeftoverFlop());
+    dispatch(revealNewFlop());
+  }
+
+  dispatch(jobHasResolved());
 }
 

@@ -4,7 +4,7 @@ import PlayerStatus from './status';
 import DoubloonCounter from './DoubloonCounter';
 import PlayerBuildings from './PlayerBuildings';
 import PlayerCrops from './PlayerCrops';
-
+import actions from '../../actions';
 import '../../styles/PlayerBoard.scss';
 
 let PlayerBoard = ({
@@ -13,7 +13,9 @@ let PlayerBoard = ({
   isCurrentPlayer,
   isCurrentJobPlayer,
   mayorPhase,
-  yourBoard
+  yourBoard,
+  onPlaceColonist,
+  onRemoveColonist
 }) => {
   return (
     <div className="player-board">
@@ -31,6 +33,8 @@ let PlayerBoard = ({
       <PlayerCrops
         crops={board.crops || []}
         canPlaceColonists={mayorPhase && yourBoard}
+        onPlaceColonist={onPlaceColonist}
+        onRemoveColonist={onRemoveColonist}
       />
     </div>
   )
@@ -50,7 +54,14 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {};
+  return {
+    onPlaceColonist: (cropIndex) => {
+      dispatch(actions.addColonistToCrop(cropIndex));
+    },
+    onRemoveColonist: (cropIndex) => {
+      dispatch(actions.removeColonistFromCrop(cropIndex))
+    }
+  };
 };
 
 PlayerBoard = connect(

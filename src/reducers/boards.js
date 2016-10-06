@@ -82,6 +82,46 @@ const boards = (state = [], action) => {
           ]
         };
       });
+    case 'ADD_COLONIST_TO_CROP':
+      const activeIndex4 = state.findIndex(p => p.active);
+
+      return state.map((player, index) => {
+        if (index !== activeIndex4) {
+          return player;
+        }
+
+        return {
+          ...player,
+          crops: [
+            ...player.crops.slice(0, action.index),
+            {
+              ...player.crops[action.index],
+              colonists: [true]
+            },
+            ...player.crops.slice(action.index+1)
+          ]
+        };
+      });
+    case 'REMOVE_COLONIST_FROM_CROP':
+      const activeIndex5 = state.findIndex(p => p.active);
+
+      return state.map((player, index) => {
+        if (index !== activeIndex5) {
+          return player;
+        }
+
+        return {
+          ...player,
+          crops: [
+            ...player.crops.slice(0, action.index),
+            {
+              ...player.crops[action.index],
+              colonists: [false]
+            },
+            ...player.crops.slice(action.index+1)
+          ]
+        };
+      });
     default:
       return state;
   }

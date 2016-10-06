@@ -12,12 +12,18 @@ describe('turns actions', function() {
   });
 
   it('START_JOB_PHASE', function() {
+    const getState = () => ({turns: []});
+    const dispatch = expect.createSpy();
+
     const expectedAction = {
       type: 'START_JOB_PHASE',
       playerTurns: []
     };
 
-    expect(actions.startJobPhase([])).toEqual(expectedAction);
+    actions.startJobPhase()(dispatch, getState);
+
+    expect(dispatch.calls.length).toEqual(1);
+    expect(dispatch).toHaveBeenCalledWith(expectedAction);
   });
 
   it('NEXT_JOB_TURN', function() {
@@ -59,7 +65,7 @@ describe('turns actions', function() {
 
     actions.jobHasResolved()(dispatch, getState);
 
-    expect(dispatch.calls.length).toEqual(6);
+    expect(dispatch.calls.length).toEqual(7);
   });
 
   it('jobHasResolved in the middle of the round', function() {
@@ -69,7 +75,7 @@ describe('turns actions', function() {
 
     actions.jobHasResolved()(dispatch, getState);
 
-    expect(dispatch.calls.length).toEqual(3);
+    expect(dispatch.calls.length).toEqual(4);
   });
 
   it('handleEndOfTurn if not the end of the round', function() {
@@ -91,7 +97,7 @@ describe('turns actions', function() {
 
     actions.handleEndOfTurn()(dispatch, getState);
 
-    expect(dispatch.calls.length).toEqual(5);
+    expect(dispatch.calls.length).toEqual(4);
   });
 
   it('handleEndOfTurn at the end of a non-settler round', function() {
@@ -102,6 +108,6 @@ describe('turns actions', function() {
 
     actions.handleEndOfTurn()(dispatch, getState);
 
-    expect(dispatch.calls.length).toEqual(3);
+    expect(dispatch.calls.length).toEqual(2);
   });
 });

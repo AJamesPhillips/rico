@@ -51,13 +51,13 @@ const mapDispatchToProps = (dispatch) => {
 
       if (job.incentive > 0) {
         dispatch(actions.modifyDoubloons(job.incentive));
-        dispatch(actions.disincentivizeTakenjob(job.id));
+        dispatch(actions.disincentivizeTakenJob(job.id));
       }
 
       if (job.title === 'prospector') {
         dispatch(actions.modifyDoubloons(1));
 
-        dispatch(actions.handleEndOfTurn());
+        dispatch(actions.jobHasResolved());
       }
     }
   };

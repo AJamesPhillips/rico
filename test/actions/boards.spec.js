@@ -4,15 +4,13 @@ import actions from '../../src/actions';
 describe('boards actions', function() {
   it('MODIFY_DOUBLOONS', function() {
     const value = 3;
-    const id = 0;
 
     const expectedAction = {
       type: 'MODIFY_DOUBLOONS',
       doubloons: 3,
-      id: 0
     };
 
-    expect(actions.modifyDoubloons(value, id)).toEqual(expectedAction);
+    expect(actions.modifyDoubloons(value)).toEqual(expectedAction);
   });
 
   it('ADD_PLAYER', function() {

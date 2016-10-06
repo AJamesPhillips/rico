@@ -1,7 +1,9 @@
 import * as React from 'react';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
-
+import Colonist from '../colonists/Colonist';
+import AddColonist from '../colonists/AddColonist';
+import RemoveColonist from '../colonists/RemoveColonist';
 const fillEmptyCropSpaces = (buildingCount) => {
   let emptySpaces = [];
   for (var i = buildingCount; i < 12; i++) {
@@ -13,7 +15,9 @@ const fillEmptyCropSpaces = (buildingCount) => {
 
 const PlayerCrops = ({
   crops,
-  mayorPhase
+  canPlaceColonists,
+  onPlaceColonist,
+  onRemoveColonist
 }) => {
   return (
     <Row>
@@ -22,17 +26,21 @@ const PlayerCrops = ({
         crops.map((crop,index) =>
           <Col
             key={index}
-            sm={3}
+            sm={4}
             className="occupied-crop-space">
             {crop.name}
             <Colonist
               visible={crop.colonists[0]}
             />
             <AddColonist
-              visible={mayorPhase}
+              visible={canPlaceColonists && !crop.colonists[0]}
+              onClick={onPlaceColonist}
+              cropIndex={index}
             />
             <RemoveColonist
-              visible={mayorPhase}
+              visible={canPlaceColonists && crop.colonists[0]}
+              onClick={onRemoveColonist}
+              cropIndex={index}
             />
           </Col>
         )
@@ -43,7 +51,7 @@ const PlayerCrops = ({
           return (
             <Col
               key={index}
-              sm={3}
+              sm={4}
               className="empty-crop-space">
               Empty
             </Col>

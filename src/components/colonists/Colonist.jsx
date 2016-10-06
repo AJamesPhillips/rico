@@ -5,8 +5,8 @@ const Colonist = ({
 }) => {
   return (
     <span
-      class="glyphicon glyphicon-user"
-      style={{display: visible}}
+      className="glyphicon glyphicon-user"
+      style={{display: visible ? 'inline' : 'none'}}
     ></span>
   );
 };

@@ -33,3 +33,17 @@ export const updateActivePlayer = (index) => {
     index
   };
 };
+
+export const addColonistToCrop = (index) => {
+  return {
+    type: 'ADD_COLONIST_TO_CROP',
+    index
+  };
+};
+
+export const removeColonistFromCrop = (index) => {
+  return {
+    type: 'REMOVE_COLONIST_FROM_CROP',
+    index
+  };
+};

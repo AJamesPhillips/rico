@@ -2,12 +2,13 @@ import * as React from 'react';
 
 const AddColonist = ({
   onClick,
-  visible
+  visible,
+  cropIndex
 }) => {
   return (
     <span
-      class="glyphicon glyphicon-plus"
-      onClick={onClick}
+      className="glyphicon glyphicon-plus"
+      onClick={() => onClick(cropIndex)}
       style={{display: visible ? 'inline' : 'none'}}
     ></span>
   );

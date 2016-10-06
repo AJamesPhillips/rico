@@ -9,7 +9,8 @@ let Shop = ({
   onBuildingClick,
   inBuildPhase,
   buildingHasSupply,
-  playerCanAffordBuilding
+  playerCanAffordBuilding,
+  resolvePurchase
 }) => {
   return (
     <div>
@@ -17,8 +18,8 @@ let Shop = ({
       {
         buildings.map(building => {
           const disabled = !inBuildPhase() ||
-                           !buildingHasSupply() ||
-                           !playerCanAffordBuilding();
+                           !buildingHasSupply(building) ||
+                           !playerCanAffordBuilding(building);
           return (
             <Building
               key={building.name}
@@ -26,7 +27,7 @@ let Shop = ({
               cost={building.cost}
               disabled={disabled}
               supply={building.supply + '/' + building.initialSupply}
-              onClick={() => resolvePurchase(store, building)}
+              onClick={() => resolvePurchase(building)}
             />
           );
         })
@@ -48,7 +49,7 @@ const mergeProps = ({state}, {dispatch}) => {
   return {
     buildings: state.buildings,
     inBuildPhase: () => {
-      return state.activeJob === 'settler';
+      return state.activeJob === 'builder';
     },
     buildingHasSupply: (building) => {
       return building.supply > 0;
@@ -70,7 +71,7 @@ const mergeProps = ({state}, {dispatch}) => {
       if (state.jobs.find(job => job.title === 'builder' && job.takenBy === currentJobPlayerID)) {
         discount = 1;
       }
-      // eventually check if the buyer has staffed quarries
+      // TODO: eventually check if the buyer has staffed quarries
 
       dispatch(actions.modifyDoubloons(-building.cost + discount));
 

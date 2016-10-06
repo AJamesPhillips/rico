@@ -12,13 +12,22 @@ describe('jobs actions', function() {
   });
 
   it('TAKE_JOB', function() {
+    const dispatch = expect.createSpy();
+    const turns = [{
+      currentPlayer: true,
+      playerID: 5
+    }];
+    const getState = () => ({turns});
     const expectedAction = {
       type: 'TAKE_JOB',
       id: 2,
-      takenBy: 'mockPlayer'
+      takenBy: 5
     };
 
-    expect(actions.takeJob(2, 'mockPlayer')).toEqual(expectedAction);
+    actions.takeJob(2)(dispatch, getState);
+
+    expect(dispatch.calls.length).toEqual(1);
+    expect(dispatch).toHaveBeenCalledWith(expectedAction);
   });
 
   it('DISINCENTIVIZE_TAKEN_JOB', function() {
