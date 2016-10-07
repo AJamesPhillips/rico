@@ -59,6 +59,10 @@ const mapDispatchToProps = (dispatch) => {
 
         dispatch(actions.jobHasResolved());
       }
+
+      if (job.title === 'mayor') {
+        dispatch(actions.assignColonists());
+      }
     }
   };
 };

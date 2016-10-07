@@ -52,4 +52,31 @@ describe('boards actions', function() {
 
     expect(actions.addBuilding({})).toEqual(expectedAction);
   });
+
+  it('ADD_COLONIST_TO_CROP', function() {
+    const expectedAction = {
+      type: 'ADD_COLONIST_TO_CROP',
+      index: 3
+    };
+
+    expect(actions.addColonistToCrop(3)).toEqual(expectedAction);
+  });
+
+  it('REMOVE_COLONIST_FROM_CROP', function() {
+    const expectedAction = {
+      type: 'REMOVE_COLONIST_FROM_CROP',
+      index: 3
+    };
+
+    expect(actions.removeColonistFromCrop(3)).toEqual(expectedAction);
+  });
+
+  it('ADD_COLONISTS', function() {
+    const expectedAction = {
+      type: 'ADD_COLONISTS',
+      colonists: 3
+    };
+
+    expect(actions.addColonists(3)).toEqual(expectedAction);
+  });
 });

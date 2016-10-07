@@ -92,6 +92,7 @@ const boards = (state = [], action) => {
 
         return {
           ...player,
+          unallocatedColonists: player.unallocatedColonists-1,
           crops: [
             ...player.crops.slice(0, action.index),
             {
@@ -112,6 +113,7 @@ const boards = (state = [], action) => {
 
         return {
           ...player,
+          unallocatedColonists: player.unallocatedColonists+1,
           crops: [
             ...player.crops.slice(0, action.index),
             {
@@ -122,6 +124,19 @@ const boards = (state = [], action) => {
           ]
         };
       });
+    case 'ADD_COLONISTS':
+      const activeIndex6 = state.findIndex(p => p.active);
+
+      return state.map((player, index) => {
+        if (index !== activeIndex6) {
+          return player;
+        }
+
+        return {
+          ...player,
+          unallocatedColonists: player.unallocatedColonists + action.colonists
+        };
+      })
     default:
       return state;
   }

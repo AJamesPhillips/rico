@@ -147,6 +147,91 @@ describe('boards reducer', function() {
     }];
 
     expect(boards(state, action)).toEqual(expectedState);
+  });
+
+  it('should handle ADD_COLONIST_TO_CROP', function() {
+    const state = [{
+      active: true,
+      unallocatedColonists: 1,
+      crops: [{
+        name: 'corn',
+        colonists: [false]
+      }]
+    }, {
+      active: false
+    }];
+
+    const action = {
+      type: 'ADD_COLONIST_TO_CROP',
+      index: 0
+    };
+
+    const expectedState = [{
+      active: true,
+      unallocatedColonists: 0,
+      crops: [{
+        name: 'corn',
+        colonists: [true]
+      }]
+    }, {
+      active: false
+    }];
+
+    expect(boards(state, action)).toEqual(expectedState);
+  });
+
+  it('should handle REMOVE_COLONIST_FROM_CROP', function() {
+    const state = [{
+      active: true,
+      unallocatedColonists: 0,
+      crops: [{
+        name: 'corn',
+        colonists: [true]
+      }]
+    }, {
+      active: false
+    }];
+
+    const action = {
+      type: 'REMOVE_COLONIST_FROM_CROP',
+      index: 0
+    };
+
+    const expectedState = [{
+      active: true,
+      unallocatedColonists: 1,
+      crops: [{
+        name: 'corn',
+        colonists: [false]
+      }]
+    }, {
+      active: false
+    }];
+
+    expect(boards(state, action)).toEqual(expectedState);
+  });
+
+  it('should handle ADD_COLONISTS', function() {
+    const state = [{
+      active: true,
+      unallocatedColonists: 2
+    }, {
+      active: false
+    }];
+
+    const action = {
+      type: 'ADD_COLONISTS',
+      colonists: 3
+    };
+
+    const expectedState = [{
+      active: true,
+      unallocatedColonists: 5
+    }, {
+      active: false
+    }];
+
+    expect(boards(state, action)).toEqual(expectedState);
   })
 });
 
