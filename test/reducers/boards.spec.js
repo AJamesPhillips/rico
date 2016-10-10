@@ -19,7 +19,8 @@ describe('boards reducer', function() {
         id: 0,
         doubloons: 3,
         buildings: [],
-        crops: []
+        crops: [],
+        unallocatedColonists: 0
       }
     ]);
   });
