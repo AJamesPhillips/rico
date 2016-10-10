@@ -39,5 +39,46 @@ describe('colonist actions', function() {
     expect(dispatch.calls.length).toEqual(5);
   });
 
+  it('replenishShipAfterMayor', function() {
+    const dispatch = expect.createSpy();
+    const boards = [{
+      buildings: [{
+        colonists: [true, false]
+      }]
+    }, {
+      buildings: [{
+        colonists: [false, true]
+      }]
+    }, {
+      buildings: [{
+        colonists: [true]
+      }]
+    }];
+    const getState = () => ({boards});
 
+    actions.replenishShipAfterMayor()(dispatch, getState);
+    expect(dispatch).toHaveBeenCalledWith(actions.replenishShip(3));
+  })
+
+
+  it('replenishShipAfterMayor', function() {
+    const dispatch = expect.createSpy();
+    const boards = [{
+      buildings: [{
+        colonists: [false, false]
+      }]
+    }, {
+      buildings: [{
+        colonists: [false, false]
+      }]
+    }, {
+      buildings: [{
+        colonists: [false]
+      }]
+    }];
+    const getState = () => ({boards});
+
+    actions.replenishShipAfterMayor()(dispatch, getState);
+    expect(dispatch).toHaveBeenCalledWith(actions.replenishShip(5));
+  })
 });

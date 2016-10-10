@@ -25,7 +25,7 @@ export const assignColonists = () => (dispatch, getState) => {
 
 export const replenishShipAfterMayor = () => (dispatch, getState) => {
   const boards = getState().boards;
-  let emptyColonistSpaces;
+  let emptyColonistSpaces = 0;
 
   for (var i = 0; i < boards.length; i++) {
     for (var j = 0; j < boards[i].buildings.length; j++) {
