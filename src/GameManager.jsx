@@ -69,4 +69,7 @@ export const initializeGameState = (store) => {
   store.dispatch(actions.setFlopSize(4));
   store.dispatch(actions.fillCropPool());
   store.dispatch(actions.revealNewFlop());
+
+  store.dispatch(actions.setRemaining(55));
+  store.dispatch(actions.replenishShip(3));
 };

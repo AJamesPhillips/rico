@@ -78,6 +78,17 @@ describe('turns actions', function() {
     expect(dispatch.calls.length).toEqual(4);
   });
 
+  it('jobHasResolved during a mayor phase', function() {
+    const dispatch = expect.createSpy();
+    const turns = [{currentPlayer: true}, {}];
+    const activeJob = 'mayor'
+    const getState = () => ({turns, activeJob});
+
+    actions.jobHasResolved()(dispatch, getState);
+
+    expect(dispatch.calls.length).toEqual(5);
+  });
+
   it('handleEndOfTurn if not the end of the round', function() {
     const dispatch = expect.createSpy();
     const jobTurns = [{currentJobPlayer: true, playerID: 2}, {}];

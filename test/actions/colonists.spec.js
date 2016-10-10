@@ -22,8 +22,22 @@ describe('colonist actions', function() {
 
   it('assignColonists', function() {
     const dispatch = expect.createSpy();
-    const getState = () => {};
+    const boards = [{
+      id: 0
+    }, {
+      id: 1
+    }, {
+      id: 2
+    }];
+    const colonists = {
+      ship: 5
+    };
+    const getState = () => ({boards, colonists});
 
     actions.assignColonists()(dispatch, getState);
+
+    expect(dispatch.calls.length).toEqual(5);
   });
+
+
 });

@@ -213,22 +213,23 @@ describe('boards reducer', function() {
 
   it('should handle ADD_COLONISTS', function() {
     const state = [{
-      active: true,
+      id: 0,
       unallocatedColonists: 2
     }, {
-      active: false
+      id: 1
     }];
 
     const action = {
       type: 'ADD_COLONISTS',
-      colonists: 3
+      colonists: 3,
+      playerID: 0
     };
 
     const expectedState = [{
-      active: true,
+      id: 0,
       unallocatedColonists: 5
     }, {
-      active: false
+      id: 1
     }];
 
     expect(boards(state, action)).toEqual(expectedState);

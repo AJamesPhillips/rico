@@ -152,7 +152,7 @@ describe('jobs reducer', function() {
     }];
 
     expect(jobs(state, action)).toEqual(expectedState);
-  })
+  });
 });
 
 describe('activeJob reducer', function() {
@@ -170,4 +170,4 @@ describe('activeJob reducer', function() {
 
     expect(activeJob(undefined, action)).toEqual(expectedState);
   });
-})
+});

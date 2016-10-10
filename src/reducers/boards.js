@@ -10,7 +10,8 @@ const boards = (state = [], action) => {
           id: idCounter++,
           doubloons: action.doubloons,
           buildings: [],
-          crops: []
+          crops: [],
+          unallocatedColonists: 0
         }
       ];
     case 'UPDATE_ACTIVE_PLAYER':
@@ -125,10 +126,8 @@ const boards = (state = [], action) => {
         };
       });
     case 'ADD_COLONISTS':
-      const activeIndex6 = state.findIndex(p => p.active);
-
-      return state.map((player, index) => {
-        if (index !== activeIndex6) {
+      return state.map(player => {
+        if (player.id !== action.playerID) {
           return player;
         }
 

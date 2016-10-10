@@ -74,9 +74,10 @@ describe('boards actions', function() {
   it('ADD_COLONISTS', function() {
     const expectedAction = {
       type: 'ADD_COLONISTS',
-      colonists: 3
+      colonists: 3,
+      playerID: 1
     };
 
-    expect(actions.addColonists(3)).toEqual(expectedAction);
+    expect(actions.addColonists(3, 1)).toEqual(expectedAction);
   });
 });

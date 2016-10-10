@@ -5,6 +5,7 @@ import { jobs, activeJob } from './jobs';
 import { turns, jobTurns } from './turns';
 import { buildings } from './buildings';
 import { crops } from './crops';
+import { colonists } from './colonists';
 
 const ricoApp = combineReducers({
   boards,
@@ -13,7 +14,8 @@ const ricoApp = combineReducers({
   buildings,
   turns,
   jobTurns,
-  crops
+  crops,
+  colonists
 });
 
 export default ricoApp;

@@ -1,6 +1,7 @@
 import { updateActivePlayer } from './boards';
 import { setActiveJob, incentivizeUntakenJobs, resetJobs } from './jobs';
 import { discardLeftoverFlop, revealNewFlop } from './crops';
+import { replenishShipAfterMayor } from './colonists';
 
 export const initializeTurns = (players) => {
   return {
@@ -42,6 +43,10 @@ export const nextRound = () => {
 };
 
 export const jobHasResolved = () => (dispatch, getState) => {
+  if (getState().activeJob === 'mayor') {
+    dispatch(replenishShipAfterMayor());
+  }
+
   dispatch(setActiveJob(''));
 
   dispatch(endJobPhase());
@@ -54,7 +59,6 @@ export const jobHasResolved = () => (dispatch, getState) => {
     dispatch(incentivizeUntakenJobs());
 
     dispatch(resetJobs());
-
   }
 
   const currentPlayer = getState().turns.find(t => t.currentPlayer) || {};

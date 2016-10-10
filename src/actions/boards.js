@@ -48,9 +48,10 @@ export const removeColonistFromCrop = (index) => {
   };
 };
 
-export const addColonists = (colonists) => {
+export const addColonists = (colonists, playerID) => {
   return {
     type: 'ADD_COLONISTS',
-    colonists
+    colonists,
+    playerID
   };
 };

@@ -4,6 +4,7 @@ import PlayerStatus from './status';
 import DoubloonCounter from './DoubloonCounter';
 import PlayerBuildings from './PlayerBuildings';
 import PlayerCrops from './PlayerCrops';
+import PassMayorButton from './PassMayorButton';
 import actions from '../../actions';
 import '../../styles/PlayerBoard.scss';
 
@@ -15,7 +16,8 @@ let PlayerBoard = ({
   mayorPhase,
   yourBoard,
   onPlaceColonist,
-  onRemoveColonist
+  onRemoveColonist,
+  onPassMayorClick
 }) => {
   return (
     <div className="player-board">
@@ -26,6 +28,7 @@ let PlayerBoard = ({
         isCurrentJobPlayer={isCurrentJobPlayer}
       />
       <DoubloonCounter doubloons={board.doubloons} />
+      <p>{board.unallocatedColonists + ' Unallocated colonists'}</p>
       <PlayerBuildings
         buildings={board.buildings || []}
         canPlaceColonists={mayorPhase && yourBoard}
@@ -35,6 +38,10 @@ let PlayerBoard = ({
         canPlaceColonists={mayorPhase && yourBoard}
         onPlaceColonist={onPlaceColonist}
         onRemoveColonist={onRemoveColonist}
+      />
+      <PassMayorButton
+        visible={mayorPhase && yourBoard}
+        onClick={onPassMayorClick}
       />
     </div>
   )
@@ -49,7 +56,7 @@ const mapStateToProps = (state, ownProps) => {
     isCurrentPlayer: currentPlayer.playerID === ownProps.board.id,
     isCurrentJobPlayer: currentJobPlayer.playerID === ownProps.board.id,
     mayorPhase: state.activeJob === 'mayor',
-    yourBoard: !!state.boards.find(p => p.active && p.id === currentJobPlayer.playerID)
+    yourBoard: !!state.boards.find(p => p.active && p.id === currentJobPlayer.playerID),
   };
 };
 
@@ -60,6 +67,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     onRemoveColonist: (cropIndex) => {
       dispatch(actions.removeColonistFromCrop(cropIndex))
+    },
+    onPassMayorClick: () => {
+      dispatch(actions.handleEndOfTurn());
     }
   };
 };
