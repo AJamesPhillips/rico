@@ -31,32 +31,26 @@ export const initializeGameState = (store) => {
     taken: false
   },
   {
-    title: 'prospector',
+    title: 'builder',
     id: 1,
     incentive: 0,
     taken: false
   },
   {
-    title: 'prospector',
+    title: 'settler',
     id: 2,
     incentive: 0,
     taken: false
   },
   {
-    title: 'builder',
+    title: 'mayor',
     id: 3,
     incentive: 0,
     taken: false
   },
   {
-    title: 'settler',
+    title: 'craftsman',
     id: 4,
-    incentive: 0,
-    taken: false
-  },
-  {
-    title: 'mayor',
-    id: 5,
     incentive: 0,
     taken: false
   }];

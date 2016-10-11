@@ -63,6 +63,13 @@ const mapDispatchToProps = (dispatch) => {
       if (job.title === 'mayor') {
         dispatch(actions.assignColonists());
       }
+
+      if (job.title === 'craftsman') {
+        dispatch(actions.resolveCrafting());
+        dispatch(actions.showCraftingModal());
+        // wait until crafting modal resolves
+        // dispatch(actions.jobHasResolved());
+      }
     }
   };
 };

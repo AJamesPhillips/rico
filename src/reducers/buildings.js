@@ -1,10 +1,24 @@
 // TODO: formalize the structure of buildings
 const buildingsInitialState = [
   {
-    name: 'Small Market',
+    name: 'Small Indigo Plant',
     cost: 1,
     supply: 5,
     initialSupply: 5,
+    colonists: [false]
+  },
+  {
+    name: 'Small Sugar Mill',
+    cost: 2,
+    supply: 5,
+    initialSupply: 5,
+    colonists: [false]
+  },
+  {
+    name: 'Small Market',
+    cost: 1,
+    supply: 2,
+    initialSupply: 2,
     colonists: [false]
   },
   {
