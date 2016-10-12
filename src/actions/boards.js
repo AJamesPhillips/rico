@@ -22,7 +22,7 @@ export const addCrop = (crop) => {
 
 export const addBarrels = (crop, volume, playerID) => {
   return {
-    type: 'CRAFT_CROP',
+    type: 'ADD_BARRELS',
     crop,
     volume,
     playerID
