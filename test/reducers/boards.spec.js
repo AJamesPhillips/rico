@@ -20,7 +20,8 @@ describe('boards reducer', function() {
         doubloons: 3,
         buildings: [],
         crops: [],
-        unallocatedColonists: 0
+        unallocatedColonists: 0,
+        barrels: {}
       }
     ]);
   });
@@ -234,6 +235,37 @@ describe('boards reducer', function() {
     }];
 
     expect(boards(state, action)).toEqual(expectedState);
-  })
+  });
+
+  it('should handle ADD_BARRELS', function() {
+    const state = [{
+      id: 0
+    }, {
+      id: 1,
+      barrels: {
+        indigo: 3,
+        corn: 1
+      }
+    }];
+
+    const action = {
+      type: 'ADD_BARRELS',
+      playerID: 1,
+      crop: 'corn',
+      volume: 3
+    };
+
+    const expectedState = [{
+      id: 0
+    }, {
+      id: 1,
+      barrels: {
+        indigo: 3,
+        corn: 4
+      }
+    }];
+
+    expect(boards(state, action)).toEqual(expectedState);
+  });
 });
 

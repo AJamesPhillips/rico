@@ -4,33 +4,33 @@ $sugar: #FFF8DC;
 $tobacco: #DEB887;
 $coffee: #4E3229;
 
-.crop {
+.crop-flop {
   width: 50px;
   height: 50px;
   margin: 10px;
 }
 
-.corn {
+.crop-flop.corn {
   background-color: $corn !important;
   border-color: darken($corn, 5%) !important;
 }
 
-.indigo {
+.crop-flop.indigo {
   background-color: $indigo !important;
   border-color: darken($indigo, 5%) !important;
 }
 
-.sugar {
+.crop-flop.sugar {
   background-color: $sugar !important;
   border-color: darken($sugar, 5%) !important;
 }
 
-.tobacco {
+.crop-flop.tobacco {
   background-color: $tobacco !important;
   border-color: darken($tobacco, 5%) !important;
 }
 
-.coffee {
+.crop-flop.coffee {
   background-color: $coffee !important;
   border-color: darken($coffee, 5%) !important;
 }

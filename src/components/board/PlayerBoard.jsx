@@ -4,6 +4,7 @@ import PlayerStatus from './status';
 import DoubloonCounter from './DoubloonCounter';
 import PlayerBuildings from './PlayerBuildings';
 import PlayerCrops from './PlayerCrops';
+import PlayerBarrels from './PlayerBarrels';
 import PassMayorButton from './PassMayorButton';
 import actions from '../../actions';
 import '../../styles/PlayerBoard.scss';
@@ -29,6 +30,9 @@ let PlayerBoard = ({
       />
       <DoubloonCounter doubloons={board.doubloons} />
       <p>{board.unallocatedColonists + ' Unallocated colonists'}</p>
+      <PlayerBarrels
+        barrels={board.barrels}
+      />
       <PlayerBuildings
         buildings={board.buildings || []}
         canPlaceColonists={mayorPhase && yourBoard}

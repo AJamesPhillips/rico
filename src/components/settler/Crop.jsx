@@ -11,7 +11,7 @@ const Crop = ({
   return (
     <Button
       onClick={() => onClick(crop, flopIndex)}
-      className={crop + ' crop'}
+      className={crop + ' crop-flop'}
       disabled={disabled}
     />
   );

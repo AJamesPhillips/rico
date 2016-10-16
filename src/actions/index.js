@@ -4,7 +4,7 @@ import * as jobs from './jobs';
 import * as turns from './turns';
 import * as buildings from './buildings';
 import * as colonists from './colonists';
-import * as crafting from './crafting';
+import * as craftSupply from './craftSupply';
 
 const actions = {
   ...crops,
@@ -13,7 +13,7 @@ const actions = {
   ...turns,
   ...buildings,
   ...colonists,
-  ...crafting
+  ...craftSupply
 };
 
 export default actions;

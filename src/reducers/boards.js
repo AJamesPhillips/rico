@@ -11,7 +11,8 @@ const boards = (state = [], action) => {
           doubloons: action.doubloons,
           buildings: [],
           crops: [],
-          unallocatedColonists: 0
+          unallocatedColonists: 0,
+          barrels: {}
         }
       ];
     case 'UPDATE_ACTIVE_PLAYER':
@@ -81,6 +82,20 @@ const boards = (state = [], action) => {
               colonists: [false]
             }
           ]
+        };
+      });
+    case 'ADD_BARRELS':
+      return state.map(player => {
+        if (player.id !== action.playerID) {
+          return player;
+        }
+
+        return {
+          ...player,
+          barrels: {
+            ...player.barrels,
+            [action.crop]: (player.barrels[action.crop] || 0) + action.volume
+          }
         };
       });
     case 'ADD_COLONIST_TO_CROP':

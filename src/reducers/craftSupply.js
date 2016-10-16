@@ -13,5 +13,7 @@ export const craftSupply = (state = initialState, action) => {
         ...state,
         [action.cropType]: state[action.cropType] - action.volume
       };
+    default:
+      return state;
   };
 };
