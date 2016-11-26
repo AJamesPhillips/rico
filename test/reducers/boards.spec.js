@@ -21,7 +21,8 @@ describe('boards reducer', function() {
         buildings: [],
         crops: [],
         unallocatedColonists: 0,
-        barrels: {}
+        barrels: {},
+        active: false
       }
     ]);
   });

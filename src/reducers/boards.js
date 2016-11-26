@@ -1,6 +1,9 @@
+/* @flow */
 let idCounter = 0;
 
-const boards = (state = [], action) => {
+type State = Board[];
+
+const boards = (state: State = [], action: Object): State => {
   switch (action.type) {
     case 'ADD_PLAYER':
       return [
@@ -12,7 +15,8 @@ const boards = (state = [], action) => {
           buildings: [],
           crops: [],
           unallocatedColonists: 0,
-          barrels: {}
+          barrels: {},
+          active: false
         }
       ];
     case 'UPDATE_ACTIVE_PLAYER':

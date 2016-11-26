@@ -1,7 +1,16 @@
+/* @flow */
+
 import _ from 'underscore';
 import { addBarrels } from './boards';
 
-export const subtractCropFromSupply = (cropType, volume) => {
+type Action =
+  | {
+    type: string,
+    cropType: CropType,
+    volume: number
+  };
+
+export const subtractCropFromSupply = (cropType: CropType, volume: number): Action => {
   return {
     type: 'SUBTRACT_CROP_FROM_SUPPLY',
     cropType,
@@ -9,7 +18,7 @@ export const subtractCropFromSupply = (cropType, volume) => {
   };
 };
 
-export const craftCrop = (board, cropType, productionBuildings) => (dispatch, getState) => {
+export const craftCrop = (board: Board, cropType: CropType, productionBuildings: string[]) => (dispatch: Dispatch, getState: () => State) => {
   const staffedCropTiles = board.crops.filter(c => c.name === cropType && c.colonists[0]);
   const cropColonists = staffedCropTiles.length;
 
@@ -32,7 +41,7 @@ export const craftCrop = (board, cropType, productionBuildings) => (dispatch, ge
   dispatch(subtractCropFromSupply(cropType, barrelsToProduce));
 };
 
-export const craftCorn = (board) => (dispatch, getState) => {
+export const craftCorn = (board: Board) => (dispatch: Dispatch, getState: () => State) => {
   const staffedCropTiles = board.crops.filter(c => c.name === 'corn' && c.colonists[0]);
   let barrelsToProduce = staffedCropTiles.length;
 
@@ -45,7 +54,7 @@ export const craftCorn = (board) => (dispatch, getState) => {
   dispatch(subtractCropFromSupply('corn', barrelsToProduce));
 };
 
-export const resolveCrafting = () => (dispatch, getState) => {
+export const resolveCrafting = () => (dispatch: Dispatch, getState: () => State) => {
   const boards = getState().boards;
 
   for (let i = 0; i < boards.length; i++) {

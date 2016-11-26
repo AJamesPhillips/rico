@@ -1,5 +1,8 @@
-// TODO: formalize the structure of buildings
-const buildingsInitialState = [
+/* @flow */
+
+type State = ShopBuilding[];
+
+const buildingsInitialState: ShopBuilding[] = [
   {
     name: 'Small Indigo Plant',
     cost: 1,
@@ -30,7 +33,7 @@ const buildingsInitialState = [
   }
 ];
 
-const buildings = (state = buildingsInitialState, action) => {
+const buildings = (state: State = buildingsInitialState, action: Object): State => {
   switch (action.type) {
     case 'REDUCE_BUILDING_SUPPLY':
       return state.map(building => {

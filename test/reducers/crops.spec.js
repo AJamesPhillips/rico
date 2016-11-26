@@ -8,7 +8,8 @@ describe('crops reducer', function() {
     expect(state).toEqual({
       pool: [],
       flop: [],
-      discarded: []
+      discarded: [],
+      flopSize: 4
     });
   });
 

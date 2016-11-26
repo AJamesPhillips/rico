@@ -1,3 +1,5 @@
+/* @flow */
+
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';

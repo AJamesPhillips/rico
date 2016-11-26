@@ -1,3 +1,13 @@
+/* @flow */
+
+type State = {
+  corn: number,
+  indigo: number,
+  sugar: number,
+  tobacco: number,
+  coffee: number
+};
+
 const initialState = {
   corn: 10,
   indigo: 10,
@@ -6,7 +16,7 @@ const initialState = {
   coffee: 10
 };
 
-export const craftSupply = (state = initialState, action) => {
+export const craftSupply = (state: State = initialState, action: Object ): State => {
   switch (action.type) {
     case 'SUBTRACT_CROP_FROM_SUPPLY':
       return {

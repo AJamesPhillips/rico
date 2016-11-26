@@ -1,12 +1,22 @@
+/* @flow */
+
 import _ from 'underscore';
+
+type State = {
+  pool: CropType[],
+  flop: CropType[],
+  discarded: CropType[],
+  flopSize: number
+};
 
 let initialState = {
   pool: [],
   flop: [],
-  discarded: []
+  discarded: [],
+  flopSize: 4
 };
 
-export const crops = (state = initialState, action) => {
+export const crops = (state: State = initialState, action: Object): State => {
   switch (action.type) {
     case 'SET_FLOP_SIZE':
       return {
@@ -57,7 +67,7 @@ export const crops = (state = initialState, action) => {
   }
 };
 
-const fillCropPool = () => {
+const fillCropPool = (): CropType[] => {
   let crops = [];
 
   for (var i = 0; i < 8; i++) {
