@@ -16,8 +16,10 @@ let PlayerBoard = ({
   isCurrentJobPlayer,
   mayorPhase,
   yourBoard,
-  onPlaceColonist,
-  onRemoveColonist,
+  onPlaceColonistCrop,
+  onRemoveColonistCrop,
+  onPlaceColonistBuilding,
+  onRemoveColonistBuilding,
   onPassMayorClick
 }) => {
   return (
@@ -36,12 +38,14 @@ let PlayerBoard = ({
       <PlayerBuildings
         buildings={board.buildings || []}
         canPlaceColonists={mayorPhase && yourBoard}
+        onPlaceColonist={onPlaceColonistBuilding}
+        onRemoveColonist={onRemoveColonistBuilding}
       />
       <PlayerCrops
         crops={board.crops || []}
         canPlaceColonists={mayorPhase && yourBoard}
-        onPlaceColonist={onPlaceColonist}
-        onRemoveColonist={onRemoveColonist}
+        onPlaceColonist={onPlaceColonistCrop}
+        onRemoveColonist={onRemoveColonistCrop}
       />
       <PassMayorButton
         visible={mayorPhase && yourBoard}
@@ -66,11 +70,18 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onPlaceColonist: (cropIndex) => {
+    onPlaceColonistCrop: (cropIndex) => {
       dispatch(actions.addColonistToCrop(cropIndex));
     },
-    onRemoveColonist: (cropIndex) => {
+    onRemoveColonistCrop: (cropIndex) => {
       dispatch(actions.removeColonistFromCrop(cropIndex))
+    },
+    onPlaceColonistBuilding: (buildingIndex) => {
+      console.log(buildingIndex);
+      dispatch(actions.addColonistToBuilding(buildingIndex));
+    },
+    onRemoveColonistBuilding: (buildingIndex) => {
+      dispatch(actions.removeColonistFromBuilding(buildingIndex))
     },
     onPassMayorClick: () => {
       dispatch(actions.handleEndOfTurn());

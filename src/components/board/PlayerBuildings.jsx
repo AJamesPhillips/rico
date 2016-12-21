@@ -1,6 +1,9 @@
 import * as React from 'react';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
+import Colonist from '../colonists/Colonist';
+import AddColonist from '../colonists/AddColonist';
+import RemoveColonist from '../colonists/RemoveColonist';
 
 const fillEmptyBuildingSpaces = (buildingCount) => {
   let emptySpaces = [];
@@ -12,18 +15,35 @@ const fillEmptyBuildingSpaces = (buildingCount) => {
 };
 
 const PlayerBuildings = ({
-  buildings
+  buildings,
+  canPlaceColonists,
+  onPlaceColonist,
+  onRemoveColonist
 }) => {
   return (
     <Row>
       <p style={{paddingLeft: '20px'}}>Buildings</p>
       {
-        buildings.map(building =>
+        buildings.map((building, index) =>
           <Col
             key={building.name}
             sm={3}
             className="occupied-building-space">
             {building.name}
+            {/* TODO: handle buildings with >1 colonists */}
+            <Colonist
+              visible={building.colonists[0]}
+            />
+            <AddColonist
+              visible={canPlaceColonists && !building.colonists[0]}
+              onClick={onPlaceColonist}
+              tileIndex={index}
+            />
+            <RemoveColonist
+              visible={canPlaceColonists && building.colonists[0]}
+              onClick={onRemoveColonist}
+              tileIndex={index}
+            />
           </Col>
         )
       }

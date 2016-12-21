@@ -33,7 +33,11 @@ const boards = (state: State = [], action: Object): State => {
           active: false
         }
       });
-    case 'MODIFY_DOUBLOONS':
+    // adding braces around a case block is somewhat nonstandard,
+    // but we're declaring activeIndex multiple times and in switch
+    // statements, case blocks don't have their own scope. so we force new ones
+    // with braces.
+    case 'MODIFY_DOUBLOONS': {
       const activeIndex = state.findIndex(p => p.active);
 
       return state.map((player,index) => {
@@ -46,14 +50,12 @@ const boards = (state: State = [], action: Object): State => {
           doubloons: player.doubloons + action.doubloons
         };
       });
-    case 'ADD_BUILDING':
-      // the number is because babel thinks you can't
-      // declare variables multiple times in different
-      // case blocks. dumb dumb dumb
-      const activeIndex2 = state.findIndex(p => p.active);
+    }
+    case 'ADD_BUILDING': {
+      const activeIndex = state.findIndex(p => p.active);
 
       return state.map((player, index) => {
-        if (index !== activeIndex2) {
+        if (index !== activeIndex) {
           return player;
         }
 
@@ -68,12 +70,12 @@ const boards = (state: State = [], action: Object): State => {
           ]
         };
       });
-    case 'ADD_CROP':
-      // see above for number in variable name
-      const activeIndex3 = state.findIndex(p => p.active);
+    }
+    case 'ADD_CROP': {
+      const activeIndex = state.findIndex(p => p.active);
 
       return state.map((player, index) => {
-        if (index !== activeIndex3) {
+        if (index !== activeIndex) {
           return player;
         }
 
@@ -88,7 +90,8 @@ const boards = (state: State = [], action: Object): State => {
           ]
         };
       });
-    case 'ADD_BARRELS':
+    }
+    case 'ADD_BARRELS': {
       return state.map(player => {
         if (player.id !== action.playerID) {
           return player;
@@ -102,11 +105,12 @@ const boards = (state: State = [], action: Object): State => {
           }
         };
       });
-    case 'ADD_COLONIST_TO_CROP':
-      const activeIndex4 = state.findIndex(p => p.active);
+    }
+    case 'ADD_COLONIST_TO_CROP': {
+      const activeIndex = state.findIndex(p => p.active);
 
       return state.map((player, index) => {
-        if (index !== activeIndex4) {
+        if (index !== activeIndex) {
           return player;
         }
 
@@ -123,11 +127,12 @@ const boards = (state: State = [], action: Object): State => {
           ]
         };
       });
-    case 'REMOVE_COLONIST_FROM_CROP':
-      const activeIndex5 = state.findIndex(p => p.active);
+    }
+    case 'REMOVE_COLONIST_FROM_CROP': {
+      const activeIndex = state.findIndex(p => p.active);
 
       return state.map((player, index) => {
-        if (index !== activeIndex5) {
+        if (index !== activeIndex) {
           return player;
         }
 
@@ -144,7 +149,54 @@ const boards = (state: State = [], action: Object): State => {
           ]
         };
       });
-    case 'ADD_COLONISTS':
+    }
+    // TODO: handle buildings with more than one colonist slot
+    case 'ADD_COLONIST_TO_BUILDING': {
+      const activeIndex = state.findIndex(p => p.active);
+
+      return state.map((player, index) => {
+        if (index !== activeIndex) {
+          return player;
+        }
+
+        return {
+          ...player,
+          unallocatedColonists: player.unallocatedColonists-1,
+          buildings: [
+            ...player.buildings.slice(0, action.index),
+            {
+              ...player.buildings[action.index],
+              colonists: [true]
+            },
+            ...player.buildings.slice(action.index+1)
+          ]
+        };
+      });
+    }
+    // TODO: handle buildings with more than one colonist slot
+    case 'REMOVE_COLONIST_FROM_BUILDING': {
+      const activeIndex = state.findIndex(p => p.active);
+
+      return state.map((player, index) => {
+        if (index !== activeIndex) {
+          return player;
+        }
+
+        return {
+          ...player,
+          unallocatedColonists: player.unallocatedColonists+1,
+          buildings: [
+            ...player.buildings.slice(0, action.index),
+            {
+              ...player.buildings[action.index],
+              colonists: [false]
+            },
+            ...player.buildings.slice(action.index+1)
+          ]
+        };
+      });
+    }
+    case 'ADD_COLONISTS': {
       return state.map(player => {
         if (player.id !== action.playerID) {
           return player;
@@ -155,6 +207,7 @@ const boards = (state: State = [], action: Object): State => {
           unallocatedColonists: player.unallocatedColonists + action.colonists
         };
       })
+    }
     default:
       return state;
   }

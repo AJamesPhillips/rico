@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/lib/Col';
 import Colonist from '../colonists/Colonist';
 import AddColonist from '../colonists/AddColonist';
 import RemoveColonist from '../colonists/RemoveColonist';
+
 const fillEmptyCropSpaces = (buildingCount) => {
   let emptySpaces = [];
   for (var i = buildingCount; i < 12; i++) {
@@ -35,12 +36,12 @@ const PlayerCrops = ({
             <AddColonist
               visible={canPlaceColonists && !crop.colonists[0]}
               onClick={onPlaceColonist}
-              cropIndex={index}
+              tileIndex={index}
             />
             <RemoveColonist
               visible={canPlaceColonists && crop.colonists[0]}
               onClick={onRemoveColonist}
-              cropIndex={index}
+              tileIndex={index}
             />
           </Col>
         )

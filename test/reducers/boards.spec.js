@@ -214,6 +214,68 @@ describe('boards reducer', function() {
     expect(boards(state, action)).toEqual(expectedState);
   });
 
+  it('should handle ADD_COLONIST_TO_BUILDING', function() {
+    const state = [{
+      active: true,
+      unallocatedColonists: 1,
+      buildings: [{
+        name: 'Small Market',
+        colonists: [false]
+      }]
+    }, {
+      active: false
+    }];
+
+    const action = {
+      type: 'ADD_COLONIST_TO_BUILDING',
+      index: 0
+    };
+
+    const expectedState = [{
+      active: true,
+      unallocatedColonists: 0,
+      buildings: [{
+        name: 'Small Market',
+        colonists: [true]
+      }]
+    }, {
+      active: false
+    }];
+
+    expect(boards(state, action)).toEqual(expectedState);
+  });
+
+  it('should handle REMOVE_COLONIST_FROM_BUILDING', function() {
+    const state = [{
+      active: true,
+      unallocatedColonists: 0,
+      buildings: [{
+        name: 'Small Market',
+        colonists: [true]
+      }]
+    }, {
+      active: false
+    }];
+
+    const action = {
+      type: 'REMOVE_COLONIST_FROM_BUILDING',
+      index: 0
+    };
+
+    const expectedState = [{
+      active: true,
+      unallocatedColonists: 1,
+      buildings: [{
+        name: 'Small Market',
+        colonists: [false]
+      }]
+    }, {
+      active: false
+    }];
+
+    expect(boards(state, action)).toEqual(expectedState);
+  });
+
   it('should handle ADD_COLONISTS', function() {
     const state = [{
       id: 0,

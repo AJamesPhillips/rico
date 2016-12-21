@@ -3,12 +3,11 @@
 import _ from 'underscore';
 import { addBarrels } from './boards';
 
-type Action =
-  | {
-    type: string,
-    cropType: CropType,
-    volume: number
-  };
+type Action = {
+  type: string,
+  cropType: CropType,
+  volume: number
+};
 
 export const subtractCropFromSupply = (cropType: CropType, volume: number): Action => {
   return {

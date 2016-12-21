@@ -1,9 +1,16 @@
-const initialState = {
+/* @flow */
+
+type State = {
+  remaining: number,
+  ship: number
+};
+
+const initialState: State = {
   remaining: 0,
   ship: 0
 };
 
-export const colonists = (state = initialState, action) => {
+export const colonists = (state: State = initialState, action: Object): State => {
   switch (action.type) {
     case 'SET_REMAINING':
       return {

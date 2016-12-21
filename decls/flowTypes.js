@@ -11,7 +11,7 @@ declare type CropType =
 
 declare type Building = {
   name: string,
-  colonists: boolean[],
+  colonists: boolean[]
 };
 
 declare type ShopBuilding = {
@@ -38,12 +38,24 @@ declare type Board = {
   doubloons: number
 };
 
+declare type Job = {
+  title: string,
+  id: number,
+  taken: boolean,
+  incentive: number
+};
+
+declare type Turn = {
+  playerID: number,
+  currentPlayer: boolean
+}
+
 declare type State = {
   boards: Board[],
-  jobs: Array<any>,
+  jobs: Job[],
   activeJob: string,
-  buildings: Array<any>,
-  turns: Array<any>,
+  buildings: ShopBuilding[],
+  turns: Turn[],
   jobTurns: Array<any>,
   crops: Object,
   colonists: Object,

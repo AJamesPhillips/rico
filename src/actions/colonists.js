@@ -1,20 +1,28 @@
+/* @flow */
+
 import { addColonists } from './boards';
 
-export const setRemaining = (remaining) => {
+type Action = {
+  type: string,
+  remaining?: number,
+  colonists?: number
+};
+
+export const setRemaining = (remaining: number): Action => {
   return {
     type: 'SET_REMAINING',
     remaining
   };
 };
 
-export const replenishShip = (colonists) => {
+export const replenishShip = (colonists: number): Action => {
   return {
     type: 'REPLENISH_SHIP',
     colonists
   };
 };
 
-export const assignColonists = () => (dispatch, getState) => {
+export const assignColonists = () => (dispatch: Dispatch, getState: () => State) => {
   const boards = getState().boards;
   const colonistsOnShip = getState().colonists.ship;
 
@@ -23,7 +31,7 @@ export const assignColonists = () => (dispatch, getState) => {
   }
 };
 
-export const replenishShipAfterMayor = () => (dispatch, getState) => {
+export const replenishShipAfterMayor = () => (dispatch: Dispatch, getState: () => State) => {
   const boards = getState().boards;
   let emptyColonistSpaces = 0;
 

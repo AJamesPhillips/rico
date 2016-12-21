@@ -71,6 +71,20 @@ export const removeColonistFromCrop = (index: number): Action => {
   };
 };
 
+export const addColonistToBuilding = (index: number): Action => {
+  return {
+    type: 'ADD_COLONIST_TO_BUILDING',
+    index
+  };
+};
+
+export const removeColonistFromBuilding = (index: number): Action => {
+  return {
+    type: 'REMOVE_COLONIST_FROM_BUILDING',
+    index
+  };
+};
+
 export const addColonists = (colonists: number, playerID: number): Action => {
   return {
     type: 'ADD_COLONISTS',
