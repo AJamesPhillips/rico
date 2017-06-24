@@ -4,16 +4,14 @@ module.exports = {
     filename: 'dist/bundle.js'
   },
   resolve: {
-    extensions: ['', '.webpack.js', '.web.js', '.ts', 'tsx', '.js', '.jsx'],
-    modulesDirectories: ['node_modules']
-
+    extensions: ['.ts', 'tsx', '.js', '.jsx'],
   },
   module: {
     loaders: [
       {
         test: /\.js(x)?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
           presets: ["es2015", "react"],
           plugins: ["transform-object-rest-spread", "transform-flow-strip-types"]
@@ -21,7 +19,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        loaders: ["style-loader", "css-loader", "sass-loader"]
       },
       {
         test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
