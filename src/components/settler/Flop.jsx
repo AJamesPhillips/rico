@@ -9,7 +9,7 @@ let Flop = ({
   settlerPhase
 }) => {
   return (
-    <div>
+    <div style={{ backgroundColor: '#DDD' }}>
       <h2>Crop Flop</h2>
       {
         flop.map((crop, index) => {
