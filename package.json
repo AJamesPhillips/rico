@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "python3 -m http.server & webpack --watch",
     "test": "nyc --reporter=lcov --extension .jsx mocha --compilers js:babel-register --recursive",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
@@ -44,6 +45,7 @@
     "react-addons-test-utils": "^15.3.2",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7"
+    "url-loader": "^0.5.7",
+    "webpack": "^2.7.0"
   }
 }
