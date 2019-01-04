@@ -1,4 +1,5 @@
-/* @flow */
+import { ShopBuilding } from '../../decls/flowTypes'
+import { Action, ACTION_TYPES } from '../actions/constants'
 
 type State = ShopBuilding[];
 
@@ -31,25 +32,21 @@ const buildingsInitialState: ShopBuilding[] = [
     initialSupply: 5,
     colonists: [false]
   }
-];
+]
 
-const buildings = (state: State = buildingsInitialState, action: Object): State => {
-  switch (action.type) {
-    case 'REDUCE_BUILDING_SUPPLY':
-      return state.map(building => {
-        if (building.name !== action.building.name) {
-          return building;
-        }
+export const buildings = (state: State = buildingsInitialState, action: Action): State => {
+  if (action.type === ACTION_TYPES.REDUCE_BUILDING_SUPPLY) {
+    return state.map(building => {
+      if (building.name !== action.building.name) {
+        return building
+      }
 
-        return {
-          ...building,
-          supply: building.supply-1
-        };
-
-      });
-    default:
-      return state;
+      return {
+        ...building,
+        supply: building.supply - 1
+      }
+    })
   }
-};
 
-export {buildings}
+  return state
+}

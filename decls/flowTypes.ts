@@ -1,33 +1,30 @@
-declare type Action = {
-  type: string
-};
 
-declare type CropType =
+export type CropType =
   | 'corn'
   | 'indigo'
   | 'sugar'
   | 'tobacco'
   | 'coffee'
 
-declare type Building = {
+export type Building = {
   name: string,
   colonists: boolean[]
-};
+}
 
-declare type ShopBuilding = {
+export type ShopBuilding = {
   name: string,
   cost: number,
   supply: number,
   initialSupply: number,
   colonists: boolean[]
-};
+}
 
-declare type Crop = {
+export type Crop = {
   name: CropType,
   colonists: boolean[]
-};
+}
 
-declare type Board = {
+export type Board = {
   id: number,
   name: string,
   active: boolean,
@@ -36,21 +33,21 @@ declare type Board = {
   unallocatedColonists: number,
   barrels: Object,
   doubloons: number
-};
+}
 
-declare type Job = {
+export type Job = {
   title: string,
   id: number,
   taken: boolean,
   incentive: number
-};
+}
 
-declare type Turn = {
+export type Turn = {
   playerID: number,
   currentPlayer: boolean
 }
 
-declare type State = {
+export type State = {
   boards: Board[],
   jobs: Job[],
   activeJob: string,
