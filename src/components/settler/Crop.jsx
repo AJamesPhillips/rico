@@ -13,7 +13,7 @@ const Crop = ({
       onClick={() => onClick(crop, flopIndex)}
       className={crop + ' crop-flop'}
       disabled={disabled}
-    />
+    >{crop}</Button>
   );
 }
 
