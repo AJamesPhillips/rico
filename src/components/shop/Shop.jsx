@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Building from './Building';
 import actions from '../../actions';
 
-let Shop = ({
+const Shop = ({
   buildings,
   onBuildingClick,
   inBuildPhase,
@@ -12,26 +12,38 @@ let Shop = ({
   playerCanAffordBuilding,
   resolvePurchase
 }) => {
+  const buildingButtonHeight = 40;
+  const style = {
+    display: "flex",
+    height: buildingButtonHeight * 6 + (buildingButtonHeight - 1),
+    flexDirection: "column",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    alignItems: "center",
+  }
   return (
     <div>
       <h2>Shop</h2>
-      {
-        buildings.map(building => {
-          const disabled = !inBuildPhase() ||
-                           !buildingHasSupply(building) ||
-                           !playerCanAffordBuilding(building);
-          return (
-            <Building
-              key={building.name}
-              name={building.name}
-              cost={building.cost}
-              disabled={disabled}
-              supply={building.remainingCount + '/' + building.initialCount}
-              onClick={() => resolvePurchase(building)}
-            />
-          );
-        })
-      }
+      <div style={style}>
+        {
+          buildings.map(building => {
+            const disabled = !inBuildPhase() ||
+                            !buildingHasSupply(building) ||
+                            !playerCanAffordBuilding(building);
+            return (
+              <Building
+                key={building.name}
+                styleHeight={buildingButtonHeight}
+                name={building.name}
+                cost={building.cost}
+                disabled={disabled}
+                supply={building.remainingCount + '/' + building.initialCount}
+                onClick={() => resolvePurchase(building)}
+              />
+            );
+          })
+        }
+      </div>
     </div>
   );
 };
@@ -80,10 +92,10 @@ const mergeProps = ({state}, {dispatch}) => {
   };
 };
 
-Shop = connect(
+const ConnectedShop = connect(
   mapStateToProps,
   mapDispatchToProps,
   mergeProps
-)(Shop);
+)(Shop)
 
-export default Shop;
+export default ConnectedShop

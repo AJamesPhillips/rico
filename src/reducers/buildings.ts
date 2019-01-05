@@ -13,7 +13,7 @@ function getBuildingsInitialState (): ShopBuilding[] {
     largeVioletBuilding: 1,
   }
 
-  return [
+  const buildings = [
     {
       name: "Small Indigo Plant",
       description: "",
@@ -24,7 +24,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 1,
       cost: 1,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.smallProductionBuilding,
     },
     {
@@ -37,7 +36,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 1,
       cost: 2,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.smallProductionBuilding,
     },
     {
@@ -50,7 +48,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 1,
       cost: 1,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.smallVioletBuilding,
     },
     {
@@ -63,7 +60,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 1,
       cost: 2,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.smallVioletBuilding,
     },
     {
@@ -76,7 +72,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 1,
       cost: 2,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.smallVioletBuilding,
     },
     {
@@ -89,7 +84,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 1,
       cost: 3,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.smallVioletBuilding,
     },
     {
@@ -102,7 +96,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 2,
       cost: 3,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.productionBuilding,
     },
     {
@@ -115,7 +108,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 2,
       cost: 4,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.productionBuilding,
     },
     {
@@ -128,7 +120,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 2,
       cost: 4,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.smallVioletBuilding,
     },
     {
@@ -141,7 +132,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 2,
       cost: 5,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.smallVioletBuilding,
     },
     {
@@ -154,7 +144,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 2,
       cost: 5,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.smallVioletBuilding,
     },
     {
@@ -167,7 +156,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 2,
       cost: 6,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.smallVioletBuilding,
     },
     {
@@ -180,7 +168,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 3,
       cost: 5,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.productionBuilding,
     },
     {
@@ -193,7 +180,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 3,
       cost: 6,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.productionBuilding,
     },
     {
@@ -206,7 +192,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 3,
       cost: 7,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.smallVioletBuilding,
     },
     {
@@ -219,7 +204,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 3,
       cost: 8,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.smallVioletBuilding,
     },
     {
@@ -232,7 +216,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 3,
       cost: 8,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.smallVioletBuilding,
     },
     {
@@ -245,7 +228,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 3,
       cost: 9,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.smallVioletBuilding,
     },
     {
@@ -258,7 +240,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 4,
       cost: 10,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.largeVioletBuilding,
     },
     {
@@ -271,7 +252,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 4,
       cost: 10,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.largeVioletBuilding,
     },
     {
@@ -284,7 +264,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 4,
       cost: 10,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.largeVioletBuilding,
     },
     {
@@ -297,7 +276,6 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 4,
       cost: 10,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.largeVioletBuilding,
     },
     {
@@ -310,10 +288,11 @@ function getBuildingsInitialState (): ShopBuilding[] {
       points: 4,
       cost: 10,
       maxQuaries: 1,
-      remainingCount: undefined,
       initialCount: initialCounts.largeVioletBuilding,
     }
   ]
+
+  return buildings.map(building => ({ ...building, remainingCount: building.initialCount }))
 }
 
 export const buildings = (state: State = getBuildingsInitialState(), action: Action): State => {
@@ -323,7 +302,7 @@ export const buildings = (state: State = getBuildingsInitialState(), action: Act
         return building
       }
 
-      let remainingCount = building.remainingCount === undefined ? building.initialCount : building.remainingCount
+      let remainingCount = building.remainingCount
       remainingCount += -1
 
       return {

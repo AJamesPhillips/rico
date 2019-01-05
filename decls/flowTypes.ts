@@ -17,7 +17,7 @@ export interface Building {
 export interface ShopBuilding extends Building {
   cost: number
   maxQuaries: number
-  remainingCount: number | undefined
+  remainingCount: number
   initialCount: number
 }
 
