@@ -1,12 +1,12 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 
-import { boards } from './boards';
-import { jobs, activeJob } from './jobs';
-import { turns, jobTurns } from './turns';
-import { buildings } from './buildings';
-import { crops } from './crops';
-import { colonists } from './colonists';
-import { craftSupply } from './craftSupply';
+import { boards } from './boards'
+import { jobs, activeJob } from './jobs'
+import { turns, jobTurns } from './turns'
+import { buildings } from './buildings'
+import { crops } from './crops'
+import { colonists } from './colonists'
+import { craftSupply } from './craftSupply'
 
 const ricoApp = combineReducers({
   boards,
@@ -18,6 +18,6 @@ const ricoApp = combineReducers({
   crops,
   colonists,
   craftSupply
-});
+})
 
-export default ricoApp;
+export default ricoApp
