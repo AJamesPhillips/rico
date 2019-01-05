@@ -1,26 +1,28 @@
+import { str_enum } from "@ajp/utils-ts/utils"
 
-export type CropType =
-  | 'corn'
-  | 'indigo'
-  | 'sugar'
-  | 'tobacco'
-  | 'coffee'
+export const CROP_TYPES = str_enum(["CORN", "INDIGO", "SUGAR", "TOBACCO", "COFFEE"])
 
-export type Building = {
-  name: string,
-  colonists: boolean[]
+export type CROP_TYPE = keyof typeof CROP_TYPES
+
+export interface Building {
+  name: string
+  description: string
+  size: number
+  maxColonists: number
+  colonists: number
+  produces: CROP_TYPE | undefined
+  points: number
 }
 
-export type ShopBuilding = {
-  name: string,
-  cost: number,
-  supply: number,
-  initialSupply: number,
-  colonists: boolean[]
+export interface ShopBuilding extends Building {
+  cost: number
+  maxQuaries: number
+  remainingCount: number | undefined
+  initialCount: number
 }
 
 export type Crop = {
-  name: CropType,
+  name: CROP_TYPE,
   colonists: boolean[]
 }
 

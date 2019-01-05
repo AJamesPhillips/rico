@@ -26,7 +26,7 @@ let Shop = ({
               name={building.name}
               cost={building.cost}
               disabled={disabled}
-              supply={building.supply + '/' + building.initialSupply}
+              supply={building.remainingCount + '/' + building.initialCount}
               onClick={() => resolvePurchase(building)}
             />
           );
