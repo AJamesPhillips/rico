@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
 import { boards } from './boards'
-import { jobs, activeJob } from './jobs'
+import { roles, activeRole } from './roles'
 import { turns, jobTurns } from './turns'
 import { buildings } from './buildings'
 import { crops } from './crops'
@@ -10,8 +10,8 @@ import { craftSupply } from './craftSupply'
 
 const ricoApp = combineReducers({
   boards,
-  jobs,
-  activeJob,
+  jobs: roles,
+  activeJob: activeRole,
   buildings,
   turns,
   jobTurns,

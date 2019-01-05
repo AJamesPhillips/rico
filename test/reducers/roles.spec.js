@@ -1,9 +1,9 @@
 import expect from 'expect';
-import { jobs, activeJob } from '../../src/reducers/jobs';
+import { roles, activeRole } from '../../src/reducers/roles';
 
 describe('jobs reducer', function() {
   it('should handle default', function() {
-    expect(jobs(undefined, {})).toEqual([]);
+    expect(roles(undefined, {})).toEqual([]);
   });
 
   it('should handle INITIALIZE_JOBS', function() {
@@ -28,7 +28,7 @@ describe('jobs reducer', function() {
       id: 1
     }];
 
-    expect(jobs(undefined, action)).toEqual(expectedState);
+    expect(roles(undefined, action)).toEqual(expectedState);
   });
 
   it('should handle TAKE_JOB', function() {
@@ -58,7 +58,7 @@ describe('jobs reducer', function() {
       takenBy: 3
     }];
 
-    expect(jobs(state, action)).toEqual(expectedState);
+    expect(roles(state, action)).toEqual(expectedState);
   });
 
   it('should handle DISINCENTIVIZE_TAKEN_JOB', function() {
@@ -87,7 +87,7 @@ describe('jobs reducer', function() {
       incentive: 0
     }];
 
-    expect(jobs(state, action)).toEqual(expectedState);
+    expect(roles(state, action)).toEqual(expectedState);
   });
 
   it('should handle INCENTIVIZE_UNTAKEN_JOBS', function() {
@@ -119,7 +119,7 @@ describe('jobs reducer', function() {
       incentive: 5
     }];
 
-    expect(jobs(state, action)).toEqual(expectedState);
+    expect(roles(state, action)).toEqual(expectedState);
   });
 
   it('should handle RESET_JOBS', function() {
@@ -151,13 +151,13 @@ describe('jobs reducer', function() {
       takenBy: undefined
     }];
 
-    expect(jobs(state, action)).toEqual(expectedState);
+    expect(roles(state, action)).toEqual(expectedState);
   });
 });
 
 describe('activeJob reducer', function() {
   it('should handle default', function() {
-    expect(activeJob(undefined, {})).toEqual('');
+    expect(activeRole(undefined, {})).toEqual('');
   });
 
   it('should handle SET_ACTIVE_JOB', function() {
@@ -168,6 +168,6 @@ describe('activeJob reducer', function() {
 
     const expectedState = 'builder';
 
-    expect(activeJob(undefined, action)).toEqual(expectedState);
+    expect(activeRole(undefined, action)).toEqual(expectedState);
   });
 });

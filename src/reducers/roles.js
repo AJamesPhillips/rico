@@ -30,7 +30,7 @@ const initialRoles = [{
   taken: false
 }]
 
-export const jobs = (state = initialRoles, action) => {
+export const roles = (state = initialRoles, action) => {
   switch (action.type) {
     case 'TAKE_JOB':
       return state.map(job => {
@@ -77,7 +77,7 @@ export const jobs = (state = initialRoles, action) => {
   }
 }
 
-export const activeJob = (state = '', action) => {
+export const activeRole = (state = '', action) => {
   switch (action.type) {
     case 'SET_ACTIVE_JOB':
       return action.job
