@@ -22,7 +22,7 @@ const PlayerBuildings = ({
 }) => {
   return (
     <Row>
-      <p style={{paddingLeft: '20px'}}>Buildings</p>
+      <p style={{ paddingLeft: "20px", fontWeight: "bold" }}>Buildings</p>
       {
         buildings.map((building, index) =>
           <Col

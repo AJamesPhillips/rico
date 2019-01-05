@@ -22,7 +22,7 @@ const PlayerCrops = ({
 }) => {
   return (
     <Row>
-      <p style={{paddingLeft: '20px'}}>Crops</p>
+      <p style={{ paddingLeft: "20px", fontWeight: "bold" }}>Crops</p>
       {
         crops.map((crop,index) =>
           <Col
