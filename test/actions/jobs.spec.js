@@ -1,5 +1,5 @@
 import expect from 'expect';
-import actions from '../../src/actions';
+import actions from '../../src/actions/index_original';
 
 describe('jobs actions', function() {
   it('INITIALIZE_JOBS', function() {

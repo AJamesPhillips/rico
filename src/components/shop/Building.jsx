@@ -1,13 +1,20 @@
-import * as React from 'react';
-import Button from 'react-bootstrap/lib/Button';
+import * as React from "react"
+import Button from "react-bootstrap/lib/Button"
 
-const Building = ({ name, cost, disabled, supply, onClick, styleHeight }) => {
+const Building = ({ name, cost, costForPlayer, playersTurnToBuild, playerAbleToBuild, supply, onClick, styleHeight }) => {
+  const styleCostForPlayer = playersTurnToBuild
+    ? { color: playerAbleToBuild ? "LimeGreen" : "Crimson" }
+    : { display: "none" }
+
   return (
     <Button
       style={{ height: styleHeight, width: 200 }}
       bsStyle="primary"
       onClick={onClick}
-      disabled={disabled}>{name + ' (' + cost + ')' + ' - ' + supply}</Button>
+      disabled={!playerAbleToBuild}
+    >
+      {name} ({cost}) <span style={styleCostForPlayer}>({costForPlayer})</span> - {supply}
+    </Button>
   );
 };
 

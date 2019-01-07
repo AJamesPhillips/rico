@@ -1,15 +1,16 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import Crop from './Crop';
-import actions from '../../actions';
+import * as React from "react"
+import { connect } from "react-redux"
+import Crop from "./Crop"
+import actions from "../../actions/index_original"
+import { selectors } from "../../reducers"
 
-let Flop = ({
+const Flop = ({
   flop,
   onCropClick,
   settlerPhase
 }) => {
   return (
-    <div style={{ backgroundColor: '#DDD' }}>
+    <div style={{ backgroundColor: "#DDD" }}>
       <h2>Crop Flop</h2>
       {
         flop.map((crop, index) => {
@@ -25,32 +26,32 @@ let Flop = ({
         })
       }
     </div>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
-    flop: state.crops.flop,
-    settlerPhase: state.activeJob === 'settler'
-  };
-};
+    flop: state.islandTiles.flop,
+    settlerPhase: selectors.inSettlerPhase(state)
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onCropClick: (crop, flopIndex) => {
-      dispatch(actions.takeFromFlop(flopIndex));
+      dispatch(actions.takeFromFlop(flopIndex))
 
-      dispatch(actions.addCrop(crop));
+      dispatch(actions.addCrop(crop))
 
-      dispatch(actions.handleEndOfTurn());
+      dispatch(actions.handleEndOfTurn())
     }
-  };
-};
+  }
+}
 
-Flop = connect(
+const ConnectedFlop = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Flop);
+)(Flop)
 
-export default Flop;
+export default ConnectedFlop
 

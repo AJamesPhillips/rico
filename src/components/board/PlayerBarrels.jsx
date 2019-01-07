@@ -1,23 +1,19 @@
-import React from 'react';
-import '../../styles/PlayerBarrels.scss';
+import React from "react"
+import "../../styles/PlayerBarrels.scss"
 
 const PlayerBarrels = ({
-  barrels
+  cropBarrels
 }) => {
 
-  const elements = Object.keys(barrels).map(b => {
+  const elements = Object.keys(cropBarrels).map(cropName => {
     return (
-      <span
-        key={b}
-      >
-        <span
-          className={"glyphicon glyphicon-oil " + b}
-        />
-        <span>{barrels[b]}</span>
+      <span key={cropName}>
+        <span className={"glyphicon glyphicon-oil " + cropName} />
+        <span>{cropBarrels[cropName]}</span>
       </span>
-    );
+    )
   })
-  return <div>{elements}</div>;
-};
+  return <div>{elements}</div>
+}
 
-export default PlayerBarrels;
+export default PlayerBarrels

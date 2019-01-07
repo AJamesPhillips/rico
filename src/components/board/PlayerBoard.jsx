@@ -1,21 +1,19 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import PlayerStatus from './status';
-import DoubloonCounter from './DoubloonCounter';
-import PlayerBuildings from './PlayerBuildings';
-import PlayerCrops from './PlayerCrops';
-import PlayerBarrels from './PlayerBarrels';
-import PassMayorButton from './PassMayorButton';
-import actions from '../../actions';
-import '../../styles/PlayerBoard.scss';
+import * as React from "react"
+import { connect } from "react-redux"
+import PlayerStatus from "./status"
+import PlayerBuildings from "./PlayerBuildings"
+import PlayerCrops from "./PlayerCrops"
+import PlayerBarrels from "./PlayerBarrels"
+import PassMayorButton from "./PassMayorButton"
+import actions from "../../actions/index_original"
+import "../../styles/PlayerBoard.scss"
 
-let PlayerBoard = ({
+const PlayerBoard = ({
   board,
   governor,
-  isCurrentPlayer,
-  isCurrentJobPlayer,
+  isCurrentRolePickingPlayer,
+  isCurrentActionTakingPlayer,
   mayorPhase,
-  yourBoard,
   onPlaceColonistCrop,
   onRemoveColonistCrop,
   onPlaceColonistBuilding,
@@ -25,73 +23,70 @@ let PlayerBoard = ({
   return (
     <div className="player-board">
       <PlayerStatus
-        playerID={board.id}
         governor={governor}
-        isCurrentPlayer={isCurrentPlayer}
-        isCurrentJobPlayer={isCurrentJobPlayer}
+        isCurrentRolePickingPlayer={isCurrentRolePickingPlayer}
+        isCurrentActionTakingPlayer={isCurrentActionTakingPlayer}
       />
-      <DoubloonCounter doubloons={board.doubloons} />
-      <p>{board.unallocatedColonists + ' Unallocated colonists'}</p>
-      <PlayerBarrels
-        barrels={board.barrels}
-      />
+      <p>Doubloons: {board.doubloons}</p>
+      <p>Unallocated colonists: {board.unallocatedColonists}</p>
+      <PlayerBarrels cropBarrels={board.cropBarrels} />
       <PlayerBuildings
         buildings={board.buildings || []}
-        canPlaceColonists={mayorPhase && yourBoard}
+        canPlaceColonists={mayorPhase && isCurrentActionTakingPlayer}
         onPlaceColonist={onPlaceColonistBuilding}
         onRemoveColonist={onRemoveColonistBuilding}
       />
       <PlayerCrops
         crops={board.crops || []}
-        canPlaceColonists={mayorPhase && yourBoard}
+        canPlaceColonists={mayorPhase && isCurrentActionTakingPlayer}
         onPlaceColonist={onPlaceColonistCrop}
         onRemoveColonist={onRemoveColonistCrop}
       />
       <PassMayorButton
-        visible={mayorPhase && yourBoard}
+        visible={mayorPhase && isCurrentActionTakingPlayer}
         onClick={onPassMayorClick}
       />
     </div>
   )
-};
+}
 
 const mapStateToProps = (state, ownProps) => {
-  const currentPlayer = state.turns.find(p => p.currentPlayer) || {};
-  const currentJobPlayer = state.jobTurns.find(p => p.currentJobPlayer) || {};
-  const currentPlayerBoardIndex = state.boards.findIndex(p => p.id === currentPlayer.playerID);
+  const { govenorPlayerId, currentRolePlayerId, currentRoleId, currentActionPlayerId } = state.round
+  const { playerId } = ownProps.board
+  // const currentJobPlayer = state.jobTurns.find(p => p.currentJobPlayer) || {}
+  // const currentPlayerBoardIndex = state.boards.findIndex(p => p.id === currentPlayer.playerID)
   return {
-    governor: state.turns[0].playerID === ownProps.board.id,
-    isCurrentPlayer: currentPlayer.playerID === ownProps.board.id,
-    isCurrentJobPlayer: currentJobPlayer.playerID === ownProps.board.id,
-    mayorPhase: state.activeJob === 'mayor',
-    yourBoard: !!state.boards.find(p => p.active && p.id === currentJobPlayer.playerID),
-  };
-};
+    governor: govenorPlayerId === playerId,
+    isCurrentRolePickingPlayer: currentRolePlayerId === playerId && currentRoleId === undefined,
+    isCurrentActionTakingPlayer: currentActionPlayerId === playerId,
+    mayorPhase: state.activeJob === "mayor",
+  }
+}
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onPlaceColonistCrop: (cropIndex) => {
-      dispatch(actions.addColonistToCrop(cropIndex));
+      dispatch(actions.addColonistToCrop(cropIndex))
     },
     onRemoveColonistCrop: (cropIndex) => {
       dispatch(actions.removeColonistFromCrop(cropIndex))
     },
     onPlaceColonistBuilding: (buildingIndex) => {
-      console.log(buildingIndex);
-      dispatch(actions.addColonistToBuilding(buildingIndex));
+      console.log(buildingIndex)
+      dispatch(actions.addColonistToBuilding(buildingIndex))
     },
     onRemoveColonistBuilding: (buildingIndex) => {
       dispatch(actions.removeColonistFromBuilding(buildingIndex))
     },
     onPassMayorClick: () => {
-      dispatch(actions.handleEndOfTurn());
+      dispatch(actions.handleEndOfTurn())
     }
-  };
-};
+  }
+}
 
-PlayerBoard = connect(
+const ConnectedPlayerBoard = connect(
   mapStateToProps,
   mapDispatchToProps
-)(PlayerBoard);
+)(PlayerBoard)
 
-export default PlayerBoard;
+export default ConnectedPlayerBoard

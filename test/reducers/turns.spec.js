@@ -1,6 +1,6 @@
 import expect from 'expect';
 import { turns, jobTurns, activePlayerTab } from '../../src/reducers/turns.js';
-import actions from '../../src/actions';
+import actions from '../../src/actions/index_original';
 
 describe('turns reducer', function() {
   it('should handle default', function() {

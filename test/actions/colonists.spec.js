@@ -1,5 +1,5 @@
 import expect from 'expect';
-import actions from '../../src/actions';
+import actions from '../../src/actions/index_original';
 
 describe('colonist actions', function() {
   it('SET_REMAINING', function() {
